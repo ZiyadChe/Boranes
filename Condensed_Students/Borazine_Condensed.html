@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Borazine and its Derivatives — Condensed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF9F4; --paper2:#F3EFE5; --ink:#1D2330; --ink2:#4A5263; --muted:#7A8294;
+  --line:#DDD6C6; --boron:#D9673E; --boronL:#F6D3C3; --hyd:#E9ECF1; --bridge:#1F8A80; --bridgeL:#CDEBE7;
+  --navy:#22395B; --gold:#D9A21B; --goldL:#FBEFCB; --red:#C2413A; --green:#2F8A4C; --violet:#6B4FA3;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --mono:"JetBrains Mono", Consolas, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#2b2e35;overflow:hidden;font-family:var(--sans);color:var(--ink)}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1600px;height:900px;position:relative;transform-origin:center center;background:var(--paper);box-shadow:0 20px 60px rgba(0,0,0,.45);overflow:hidden}
+.slide{position:absolute;inset:0;padding:70px 100px 110px;display:none}
+.slide.active{display:block}
+.slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:linear-gradient(var(--boron),var(--gold))}
+
+/* typography */
+.kicker{font:600 17px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--boron);margin-bottom:14px}
+h1{font:700 76px/1.05 var(--serif);letter-spacing:-.01em}
+h2{font:600 50px/1.12 var(--serif);letter-spacing:-.005em;margin-bottom:30px;max-width:1300px}
+h3{font:600 28px/1.2 var(--serif);margin-bottom:12px;color:var(--navy)}
+p,li{font-size:27px;line-height:1.45;color:var(--ink)}
+.lead{font-size:30px;color:var(--ink2);max-width:1200px;line-height:1.45}
+.small{font-size:21px;color:var(--ink2)}
+ul.b{list-style:none}
+ul.b>li{position:relative;padding-left:34px;margin:0 0 16px}
+ul.b>li::before{content:"";position:absolute;left:4px;top:15px;width:12px;height:12px;border-radius:3px;background:var(--boron);transform:rotate(45deg)}
+ul.b.teal>li::before{background:var(--bridge)}
+ul.b.tight>li{font-size:24.5px;margin-bottom:12px}
+ul.b.tight>li::before{top:13px}
+ul.b.navy>li::before{background:var(--navy)}
+ul.b li ul{list-style:none;margin-top:8px}
+ul.b li li{font-size:24px;color:var(--ink2);padding-left:24px;position:relative;margin-bottom:6px}
+ul.b li li::before{content:"–";position:absolute;left:0;color:var(--muted)}
+sub,sup{font-size:.68em;line-height:0}
+.chem{font-family:var(--sans);font-weight:600}
+.hl{background:linear-gradient(transparent 58%,var(--goldL) 58%);padding:0 2px}
+.B{color:var(--boron);font-weight:700}.Hb{color:var(--bridge);font-weight:700}
+.mono{font-family:var(--mono)}
+em{font-style:italic}
+b,strong{font-weight:700}
+
+/* layout */
+.cols{display:grid;gap:56px;align-items:start}
+.c2{grid-template-columns:1fr 1fr}.c32{grid-template-columns:3fr 2fr}.c23{grid-template-columns:2fr 3fr}.c3{grid-template-columns:1fr 1fr 1fr}
+.center{display:flex;align-items:center;justify-content:center}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 30px;box-shadow:0 4px 18px rgba(30,35,48,.06)}
+.box{background:var(--paper2);border-left:6px solid var(--navy);border-radius:4px 14px 14px 4px;padding:22px 28px}
+.box h4{font:700 16px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin-bottom:12px}
+.box p,.box li{font-size:23px}
+.quote{font:italic 400 30px/1.4 var(--serif);color:var(--navy);border-left:4px solid var(--gold);padding:6px 0 6px 26px}
+.quote cite{display:block;font:500 19px/1.3 var(--sans);font-style:normal;color:var(--muted);margin-top:10px}
+figure{margin:0}
+figure img{display:block;max-width:100%;border-radius:12px}
+figcaption{font-size:16px;color:var(--muted);margin-top:8px;line-height:1.35}
+.tag{display:inline-block;font:700 15px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:30px;background:var(--boronL);color:#8a3417}
+.tag.t{background:var(--bridgeL);color:#0f5a53}.tag.n{background:#DCE3EF;color:var(--navy)}.tag.g{background:var(--goldL);color:#7a5a06}
+
+/* references strip */
+.refs{position:absolute;left:100px;right:180px;bottom:28px;border-top:1px solid var(--line);padding-top:10px;font-size:15.5px;line-height:1.35;color:var(--muted)}
+.refs b{color:var(--ink2);font-weight:600}
+.refs i{font-style:italic}
+
+/* fragments & entry animation */
+.f{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+.f.on{opacity:1;transform:none}
+.f.fade{transform:none}
+.slide.active .rise{animation:rise .75s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*110ms + 80ms)}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.slide.active .pop{animation:pop .6s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(var(--i,0)*120ms + 150ms)}
+@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+.slide.active .draw path,.slide.active .draw line,.slide.active path.draw,.slide.active line.draw{stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);animation:draw 1.4s ease forwards;animation-delay:calc(var(--d,0)*1ms + 200ms)}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* title + dividers */
+.title-slide{background:radial-gradient(1200px 700px at 85% 30%,#FDEBDD 0%,transparent 60%),radial-gradient(900px 600px at 10% 100%,#E3F2EF 0%,transparent 55%),var(--paper)}
+.divider{background:var(--navy);color:#fff}
+.divider::before{background:linear-gradient(var(--gold),var(--boron))}
+.divider .num{font:700 220px/1 var(--serif);color:rgba(255,255,255,.08);position:absolute;right:90px;bottom:40px}
+.divider h2{color:#fff;font-size:68px;margin-top:230px}
+.divider .kicker{color:var(--gold)}
+.divider p{color:#C9D3E3;font-size:28px;max-width:1000px}
+
+/* did you know */
+.dyk{background:linear-gradient(135deg,#FFF7E3 0%,#FBF9F4 60%)}
+.dyk .badge{display:inline-flex;align-items:center;gap:12px;background:var(--gold);color:#fff;font:700 20px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:12px 22px;border-radius:40px;margin-bottom:26px;box-shadow:0 6px 18px rgba(217,162,27,.35)}
+.dyk .badge svg{width:24px;height:24px}
+
+/* tables */
+table.t{border-collapse:collapse;width:100%;font-size:23px}
+table.t th{font:700 16px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px;border-bottom:2px solid var(--ink)}
+table.t td{padding:11px 14px;border-bottom:1px solid var(--line)}
+table.t td.num{font-family:var(--mono);font-size:21px;text-align:right}
+table.t th.num{text-align:right}
+
+/* chrome */
+#bar{position:absolute;left:0;top:0;height:5px;background:linear-gradient(90deg,var(--boron),var(--gold));transition:width .4s;z-index:5}
+#counter{position:absolute;right:42px;bottom:30px;font:600 16px/1 var(--mono);color:var(--muted);z-index:5}
+#deckname{position:absolute;right:42px;top:26px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);z-index:5}
+
+#hint{position:fixed;left:16px;bottom:12px;font:13px var(--sans);color:#9aa0ab;transition:opacity 1s}#hint.gone{opacity:0}
+#overview{position:fixed;inset:0;background:rgba(20,22,28,.94);display:none;overflow:auto;padding:40px;z-index:50}
+#overview.show{display:block}
+#overview h5{color:#fff;font:600 22px var(--serif);margin-bottom:20px}
+#overview .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+#overview button{all:unset;cursor:pointer;background:#2c313b;border-radius:10px;padding:14px;color:#dfe3ea;font:15px/1.3 var(--sans)}
+#overview button:hover,#overview button.cur{background:var(--boron);color:#fff}
+#overview button span{display:block;font:600 12px var(--mono);color:#9aa3b2;margin-bottom:4px}
+
+/* molecule viewer */
+.mol{position:relative;background:radial-gradient(circle at 50% 40%,#fff 0%,#F4F1EA 70%);border:1px solid var(--line);border-radius:20px;overflow:hidden;cursor:grab}
+.mol canvas{display:block;width:100%;height:100%}
+.mol .cap{position:absolute;left:18px;top:14px;font:700 15px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.mol .hint{position:absolute;right:16px;bottom:12px;font:13px var(--sans);color:var(--muted)}
+
+/* evidence matrix */
+table.ev{border-collapse:separate;border-spacing:0;width:100%}
+table.ev th{font:700 17px/1.25 var(--sans);color:var(--ink2);padding:10px 8px;text-align:center;vertical-align:bottom}
+table.ev th:first-child{text-align:left;width:46%}
+table.ev td{font-size:22px;padding:11px 10px;border-top:1px solid var(--line);text-align:center;transition:background .4s,opacity .4s}
+table.ev td:first-child{text-align:left;font-size:21px;line-height:1.3}
+table.ev td small{display:block;font-size:15px;color:var(--muted)}
+.ok{color:var(--green);font-weight:800;font-size:28px}.no{color:var(--red);font-weight:800;font-size:28px}.mid{color:var(--gold);font-weight:800;font-size:28px}
+table.ev .dead{background:repeating-linear-gradient(135deg,#f1ece2 0 8px,#f8f5ee 8px 16px);opacity:.45}
+table.ev th.win{color:var(--bridge)}
+table.ev .winc{background:var(--bridgeL)}
+
+/* timeline */
+.tl{position:relative;height:520px;margin-top:10px}
+.tl .axis{position:absolute;left:0;right:0;top:250px;height:4px;background:var(--line);border-radius:2px}
+.tl .ev{position:absolute;width:190px;transform:translateX(-50%)}
+.tl .ev .dot{position:absolute;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--boron);border:4px solid var(--paper);box-shadow:0 0 0 2px var(--boron)}
+.tl .ev .stem{position:absolute;left:50%;width:2px;background:var(--line)}
+.tl .ev .yr{font:700 22px/1 var(--mono);color:var(--boron)}
+.tl .ev .tx{font-size:18px;line-height:1.3;color:var(--ink2);margin-top:6px}
+.tl .ev.up{top:0}.tl .ev.up .dot{top:243px}.tl .ev.up .stem{top:150px;height:95px}
+.tl .ev.dn{top:290px}.tl .ev.dn .dot{top:-47px}.tl .ev.dn .stem{top:-30px;height:28px}
+.tl .ev.t .dot{background:var(--bridge);box-shadow:0 0 0 2px var(--bridge)} .tl .ev.t .yr{color:var(--bridge)}
+.tl .ev.w .dot{background:var(--muted);box-shadow:0 0 0 2px var(--muted)} .tl .ev.w .yr{color:var(--muted)}
+
+/* portrait frame */
+.portrait{position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#DCE3EF,#F3EFE5);border:1px solid var(--line)}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15)}
+.portrait .mono-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font:700 86px/1 var(--serif);color:var(--navy);opacity:.55}
+.portrait.noimg .mono-ph{display:flex}
+.portrait.noimg img{display:none}
+
+/* orbital boxes */
+.orb{display:inline-flex;gap:6px;align-items:flex-end}
+.ob{width:58px;height:58px;border:2.5px solid var(--ink);border-radius:6px;display:flex;align-items:center;justify-content:center;gap:4px;font:700 30px/1 var(--sans);background:#fff}
+.ob.empty{border-style:dashed;border-color:var(--boron);background:var(--boronL)}
+.olab{font:600 18px var(--mono);color:var(--ink2);text-align:center;margin-top:6px}
+.arrowr{font:400 46px/1 var(--sans);color:var(--muted);margin:0 22px}
+
+/* tally */
+.tally{display:flex;gap:16px;align-items:center;font:700 34px/1 var(--mono)}
+.tally .pill{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px 20px}
+.pill.ok2{border-color:var(--green);color:var(--green)}.pill.bad{border-color:var(--red);color:var(--red)}
+
+.qa .q{font-size:26px;font-weight:600;margin-bottom:6px}
+.qa .a{font-size:22px;color:var(--bridge);margin-bottom:22px;padding-left:20px;border-left:3px solid var(--bridgeL)}
+
+
+.avrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.avrow figcaption{text-align:center;font-size:14px;margin-top:4px}
+.portrait .mono-ph{display:none}
+.symbtns{display:flex;gap:10px;margin-top:10px;justify-content:center}
+.symbtns button,.modebtn{all:unset;cursor:pointer;font:600 17px var(--sans);padding:7px 16px;border-radius:20px;border:2px solid var(--line);background:#fff;color:var(--ink2)}
+.symbtns button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+#modes-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+#modes-grid .mp{background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px 8px}
+
+.notes{display:none}
+.grimm td{padding:9px 8px}
+.grimm td.bo{color:#8a3417;background:var(--boronL);font-weight:700}
+.grimm td.lab{color:var(--muted);font-size:16px;text-align:left;font-weight:600}
+#counter{font:700 18px/1 var(--mono);color:var(--ink2);background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:20px;padding:7px 14px;bottom:22px;right:34px}
+.lg text{font-family:"Source Sans 3","Segoe UI",sans-serif;font-weight:700}
+
+body.noanim .f,body.noanim .slide.active .rise,body.noanim .slide.active .pop{animation:none!important;transition:none!important}body.noanim *,body.noanim *::before,body.noanim *::after{animation-duration:0s!important;animation-delay:0s!important;transition-duration:0s!important;transition-delay:0s!important}body.noanim .draw{animation:none!important;stroke-dashoffset:0!important}
+#animtoast{position:fixed;left:50%;top:22px;transform:translateX(-50%);background:rgba(29,35,48,.9);color:#fff;font:600 18px var(--sans);padding:10px 20px;border-radius:24px;opacity:0;transition:opacity .3s;z-index:99;pointer-events:none}#animtoast.show{opacity:1}
+@media print{.notes{display:none!important}html,body{overflow:visible;background:#fff}#viewport{position:static;display:block}#stage{transform:none!important;box-shadow:none}.slide{display:block;position:relative;page-break-after:always;height:900px}.f{opacity:1;transform:none}#bar,#counter,#hint,#deckname{display:none}}
+input[type=range]{accent-color:#D9673E}
+/* larger type for projection */
+p,li{font-size:28px}
+ul.b.tight>li{font-size:26px!important;margin-bottom:10px}
+.small{font-size:23px!important}
+table.t{font-size:22.5px!important}
+table.t td{padding:8px 12px}
+table.t th{font-size:17.5px!important}
+.box p,.box li{font-size:24px!important}
+.box h4{font-size:17px}
+figcaption{font-size:18.5px!important}
+.refs{font-size:17px!important;line-height:1.3}
+.mol .cap{font-size:17px!important}
+.mol .hint{font-size:15px}
+.symbtns button{font-size:20px!important;padding:8px 16px!important}
+.kicker{font-size:19px}
+.qa .q{font-size:28px}.qa .a{font-size:25px}
+.card .small,.card p.small{font-size:22px!important}
+.card h4{font-size:22px}
+#solver2 .sv-pre{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+#solver2 button,#wade-calc button,.vrb button{all:unset;cursor:pointer;font:600 20px var(--sans);padding:7px 14px;border-radius:20px;border:2px solid var(--line);background:#fff;color:var(--ink2)}
+#solver2 .sv-pre button.on,#wade-calc button.on,.vrb button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+#solver2 .sv-ctl{display:flex;gap:30px;margin-bottom:12px;font-size:26px;align-items:center}
+#solver2 .sv-k button{padding:2px 14px;font-size:24px;margin:0 6px}
+#solver2 .sv-k b{display:inline-block;min-width:30px;text-align:center}
+#solver2 .sv-head{font-size:24px;color:var(--ink2);margin-bottom:10px}
+#solver2 .sv-tab{font-size:23px!important}
+#solver2 .sv-tab td,#solver2 .sv-tab th{padding:5px 16px}
+#wade-calc .wc-pre{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+#wade-calc .wc-tab{font-size:26px!important}
+#wade-calc .wc-tab td,#wade-calc .wc-tab th{padding:5px 14px}
+#wade-calc .wc-res{margin-top:14px;font-size:27px;line-height:1.5}
+.vrb{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.eq{font:600 32px/1.3 var(--serif);text-align:center;color:var(--navy);margin:6px 0}
+.card h4{font-size:22px}
+.card p{font-size:24px}
+
+p.eq,.card p.eq{font:600 32px/1.3 var(--serif)!important;text-align:center;color:var(--navy)}
+
+/* readability pass */
+table.t{font-size:27px!important}
+table.t th{font-size:18.5px!important}
+table.t td,table.t th{padding:9px 14px}
+table.t td.num,table.t th.num,table.t .c{text-align:center!important;font-family:var(--sans);font-size:27px!important}
+table.t th.num{font-size:18.5px!important}
+ul.b.tight>li{font-size:27px!important}
+p,li{font-size:28px}
+.box p{font-size:25px!important}
+.card p{font-size:25px}
+.card h4{font-size:23px!important}
+figcaption{font-size:20px!important}
+.refs{font-size:17.5px!important}
+.small{font-size:24px!important}
+.mol .cap{font-size:18px!important}
+#solver2 .sv-pre{margin-bottom:22px}
+#solver2 .sv-ctl{margin:6px 0 16px}
+
+#wade-calc .wc-tab td.num{font-size:26px!important}
+#solver2 .sv-tab td.num{font-size:24px!important}
+.big29 td,.big29 td.num{font-size:29px!important}
+table.t th.c{font-size:18.5px!important}
+/* pass 3: larger type, more leading */
+p,li{font-size:30px;line-height:1.5}
+ul.b.tight>li{font-size:29px!important;line-height:1.45;margin-bottom:14px}
+table.t{font-size:28px!important}
+table.t td.num,table.t th.num,table.t .c{font-size:28px!important}
+table.t th,table.t th.num,table.t th.c{font-size:19px!important}
+.box p{font-size:27px!important;line-height:1.5}
+.card p{font-size:27px!important;line-height:1.45}
+.small{font-size:25px!important}
+figcaption{font-size:21px!important}
+.refs{font-size:18px!important}
+.steps p{font-size:30px;margin:0 0 10px;line-height:1.4}
+#solver2 .sv-ctl{display:flex;gap:22px;margin:30px 0 28px!important;flex-wrap:wrap}
+#solver2 .sv-k{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:16px;border:2.5px solid;background:#fff}
+#solver2 .sv-p{border-color:#22395B}#solver2 .sv-p i,#solver2 .sv-p b{color:#22395B}
+#solver2 .sv-q{border-color:#1F8A80}#solver2 .sv-q i,#solver2 .sv-q b{color:#1F8A80}
+#solver2 .sv-c{border-color:#6B4FA3}#solver2 .sv-c i,#solver2 .sv-c b{color:#6B4FA3}
+#solver2 .sv-lab{font-size:21px;color:var(--ink2);margin-right:6px}#solver2 .sv-lab i{font-size:28px;font-weight:700;margin-right:4px}
+#solver2 .sv-k b{font-size:28px}
+#solver2 .sv-head{font-size:26px!important;margin-bottom:12px}
+#solver2 .sv-tab{font-size:26px!important}#solver2 .sv-tab td.num{font-size:26px!important}
+#wade-calc .wc-res{font-size:29px}
+#solver2 .sv-ctl{gap:14px!important}
+#solver2 .sv-k{padding:6px 10px}
+#solver2 .sv-lab{font-size:18px}
+#solver2 .sv-k button{padding:2px 11px!important;margin:0 3px!important}
+.qa .q{font-size:30px!important}.qa .a{font-size:27px!important;line-height:1.45}
+/* equation tables */
+table.t.eqt td{font-family:var(--serif);padding:8px 14px}
+table.t.eqt td.n{font-family:var(--sans);font-size:22px!important;color:var(--ink2)}
+h3{font-size:27px}
+#modes6{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+#modes6 .mp{background:#fff;border:1px solid var(--line);border-radius:14px}
+#irint-btns button{font-size:24px!important}
+#irint-info{font-size:27px;line-height:1.45}
+#deriv-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+#deriv-gal .dg{background:#fff;border:1px solid var(--line);border-radius:14px;padding:2px 6px 8px;text-align:center}
+#deriv-gal .dgc{font-size:21px;line-height:1.3;color:var(--ink2)}
+#deriv-gal .dgc b{color:var(--ink);font-size:22px}
+.ring{background:#fff;border:1px solid var(--line);border-radius:14px}
+
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+<div id="bar"></div>
+<div id="deckname">Electron-Deficient Boron Compounds · Condensed: Borazine</div>
+<!-- TITLE -->
+<section class="slide title-slide" data-title="Title">
+  <div class="cols c32" style="height:100%;align-items:center">
+    <div>
+      <div class="kicker rise" style="--i:0">M.Sc. · Electron-Deficient Compounds · Condensed notes</div>
+      <h1 class="rise" style="--i:1">Borazine and<br>its Derivatives</h1>
+      <p class="lead rise" style="--i:2;margin-top:26px">Structure, bonding, preparation, physical and chemical properties of B<sub>3</sub>N<sub>3</sub>H<sub>6</sub>, and how its B- and N-substituted derivatives are made and behave.</p>
+      <p class="small rise" style="--i:3;margin-top:40px">P. A. Mohammed Ziyad · Department of Chemistry, Farook College (Autonomous), Kozhikode</p>
+    </div>
+    <div class="mol pop" style="--i:2;height:520px" data-mol="borazine" data-hlab="1" data-scale="0.7" data-yaw="0.2" data-pitch="1.0"><div class="cap">B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> · D<sub>3h</sub></div><div class="hint">drag to rotate</div></div>
+  </div>
+  <div class="refs"><b>J. C. Sheldon, B. C. Smith</b>, "The borazoles", <i>Q. Rev. Chem. Soc.</i> 1960, <b>14</b>, 200; <b>E. L. Muetterties</b> (ed.), <i>The Chemistry of Boron and its Compounds</i>, Wiley, 1967, ch. 1; <b>W.-K. Li, G.-D. Zhou, T. C. W. Mak</b>, <i>Advanced Structural Inorganic Chemistry</i>, OUP, 2008, §13.3.</div>
+  <aside class="notes">Condensed from Deck 9 of the full series. Sheldon and Smith use the older name "borazole".</aside>
+</section>
+
+<!-- OUTLINE -->
+<section class="slide" data-title="Outline">
+  <div class="kicker">Outline</div>
+  <h2>Two parts</h2>
+  <div class="cols c2" style="gap:24px 60px;margin-top:10px">
+    <div class="card rise" style="--i:0"><h3><span class="tag n">A</span>&nbsp; Borazine, B<sub>3</sub>N<sub>3</sub>H<sub>6</sub></h3>
+      <ul class="b tight" style="margin-top:10px"><li>Structure</li><li>Bonding</li><li>Preparation</li><li>Physical properties</li><li>Chemical properties</li></ul></div>
+    <div class="card rise" style="--i:1"><h3><span class="tag n">B</span>&nbsp; Derivatives</h3>
+      <ul class="b tight" style="margin-top:10px"><li>Types and names</li><li>Preparation: ring-forming routes</li><li>Preparation: substitution on the ring</li><li>Properties</li></ul></div>
+  </div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960); <b>Muetterties</b> (1967), ch. 1.</div>
+  <aside class="notes">Orientation slide.</aside>
+</section>
+
+<!-- PART A -->
+<section class="slide divider" data-title="Part A · Borazine">
+  <div class="kicker">Part A</div>
+  <h2>Borazine, "inorganic benzene"</h2>
+  <p>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub>: isoelectronic with C<sub>6</sub>H<sub>6</sub>, but polar.</p>
+  <div class="num">A</div>
+  <aside class="notes">Part A.</aside>
+</section>
+
+<section class="slide" data-title="Discovery and name">
+  <div class="kicker">Borazine · history</div>
+  <h2>Discovery and name</h2>
+  <div class="cols" style="grid-template-columns:1.15fr 1fr;gap:44px">
+    <div id="hist-svg"></div>
+    <div>
+      <ul class="b tight">
+        <li class="f" data-o="5">Stock's vacuum line made the work possible, but early yields were only "a few millilitres of vapour".</li>
+        <li class="f" data-o="6">The name: Wiberg's "Borazol" became <b>borazole</b>; an ACS committee recommended <b>borazine</b>, which Sheldon and Smith in 1960 still declined to use.</li>
+      </ul>
+      <div class="box f" data-o="7" style="margin-top:10px"><h4>Same ring, more early chemistry</h4><p>As early as 1889 Rideal made "BClNPh" from BCl<sub>3</sub> and aniline. Jones and Kinney (1939) showed it was a trimer, B-trichloro-N-triphenylborazine, and related it to borazole.</p></div>
+    </div>
+  </div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 200–203, refs. 1–5, 25–26: <b>A. Stock, E. Pohland</b>, <i>Ber.</i> 1926, <b>59</b>, 2215; <b>A. Stock, R. Wierl</b>, <i>Z. anorg. Chem.</i> 1931, <b>203</b>, 228; <b>E. Wiberg, A. Bolz</b>, <i>Ber.</i> 1940, <b>73</b>, 209.</div>
+  <aside class="notes">A short history, tying back to Stock. Stock and Pohland obtained borazine by heating the diborane–ammonia adduct.</aside>
+</section>
+
+<section class="slide" data-title="Structure: planar, equal bonds">
+  <div class="kicker">Borazine · structure</div>
+  <h2>A planar ring with six equal B–N bonds</h2>
+  <div class="cols" style="grid-template-columns:1fr 1.1fr;gap:40px">
+    <div class="mol pop" style="height:460px" data-mol="borazine" data-labels="0" data-hlab="1" data-scale="0.68" data-yaw="0.2" data-pitch="1.15"><div class="cap">D<sub>3h</sub>; B and N alternate</div><div class="hint">drag to rotate</div></div>
+    <div>
+      <table class="t">
+        <tr><th>compound</th><th class="num">B–N / Å</th><th>method</th></tr>
+        <tr class="f"><td>h-BN (layer)</td><td class="num">1.446</td><td>X-ray</td></tr>
+        <tr class="f"><td><b>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub></b></td><td class="num"><b>1.44 ± 0.02</b></td><td>electron diffraction</td></tr>
+        <tr class="f"><td>B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Me<sub>3</sub></td><td class="num">1.42 ± 0.02</td><td>electron diffraction</td></tr>
+        <tr class="f"><td>B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub></td><td class="num">1.413 ± 0.010</td><td>X-ray</td></tr>
+        <tr class="f"><td><i>estimated single B–N</i></td><td class="num">1.45 (or 1.57)</td><td>radii</td></tr>
+        <tr class="f"><td><i>BN diatomic (double)</i></td><td class="num">1.218</td><td>spectroscopy</td></tr>
+      </table>
+      <p class="small f" style="margin-top:10px">Electron-donating N-Me and electron-withdrawing B-Cl both shorten the ring bonds: both increase N→B π donation.</p>
+    </div>
+  </div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), Table 2, p. 215 (Bauer 1938; Coffin &amp; Bauer 1955; Coursen &amp; Hoard 1952); single-bond 1.57 Å: <b>Li, Zhou, Mak</b> (2008), §13.3.</div>
+  <aside class="notes">The estimated single-bond length depends on the radii used: Sheldon and Smith estimate 1.45 Å, Li et al. 1.57 Å. With the larger value, borazine's 1.44 Å implies substantial π bonding; with the smaller, very little. The bond-order argument is therefore only qualitative. Sheldon and Smith estimate about 20 % double-bond character in B-trichloroborazine.</aside>
+</section>
+
+<section class="slide" data-title="Isoelectronic but polar">
+  <div class="kicker">B–N and C–C</div>
+  <h2>Isoelectronic, but polar</h2>
+  <div class="cols c2" style="gap:50px">
+    <div id="iso-svg"></div>
+    <div>
+      <ul class="b tight">
+        <li class="f" data-o="3">B (3 e) + N (5 e) = C (4 e) + C (4 e): a B–N unit is <b>isoelectronic</b> with C–C.</li>
+        <li class="f" data-o="4">But N is much more electronegative than B (Pauling 3.04 vs 2.04). The σ bond is polarised B<sup>δ+</sup>–N<sup>δ−</sup>.</li>
+        <li class="f" data-o="5">N's lone pair can be donated into B's empty p orbital: a <b>dative π bond</b> N→B, which pushes electron density the other way.</li>
+        <li class="f" data-o="6">Result: "olefin-like" aminoboranes R<sub>2</sub>B=NR<sub>2</sub> are only <b>qualitatively</b> like alkenes. They are not rigidly planar (B–N rotation barrier ≈ 20 kcal mol⁻¹, far below C=C) and often dimerise.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="refs"><b>Muetterties</b> (1967), ch. 1, pp. 19–20; <b>Wade</b> (1971), §4-4, p. 86; electronegativities: Pauling scale.</div>
+  <aside class="notes">The whole deck is about this tension: same electron count as carbon, very different polarity. The π donation partly offsets the σ polarity, but not completely.</aside>
+</section>
+
+<section class="slide" data-title="The π system">
+  <div class="kicker">Borazine · bonding</div>
+  <h2>The π system: shared, but unevenly</h2>
+  <div class="cols c2" style="gap:44px">
+    <div id="pi-svg"></div>
+    <div>
+      <ul class="b tight">
+        <li class="f" data-o="1">Both rings have six π electrons in three bonding π MOs.</li>
+        <li class="f" data-o="2">In benzene the six p orbitals are identical: the MOs are spread evenly.</li>
+        <li class="f" data-o="3">In borazine the N 2p orbitals lie <b>lower</b> in energy than the B 2p. The filled π MOs are mainly on <b>N</b>; the empty ones mainly on <b>B</b>.</li>
+        <li class="f" data-o="4">So the π electrons are partly localised as N lone pairs: delocalisation is real but weaker than in benzene.</li>
+      </ul>
+      
+    </div>
+  </div>
+  <div class="refs"><b>Muetterties</b> (1967), p. 20; <b>Sheldon &amp; Smith</b> (1960), pp. 215–217 (Roothaan &amp; Mulliken MO treatment); <b>Li, Zhou, Mak</b> (2008), §13.3. Energy diagram schematic.</div>
+  <aside class="notes">This is the key bonding idea: an electronegativity difference splits the degenerate p orbital set and polarises the π MOs. Modern calculations generally describe borazine as weakly aromatic, far less than benzene.</aside>
+</section>
+
+<section class="slide" data-title="Writing borazine">
+  <div class="kicker">Borazine · structures</div>
+  <h2>Writing borazine: three ways</h2>
+  <div id="res-svg"></div>
+  <div class="cols c3" style="gap:30px;margin-top:6px">
+    <p class="f" data-o="1"><b>σ only</b>: N keeps its lone pairs; B has empty p orbitals. No formal charges.</p>
+    <p class="f" data-o="2"><b>Kekulé-type</b>: three dative N=B π bonds, with formal N<sup>+</sup> and B<sup>−</sup>. Two such forms.</p>
+    <p class="f" data-o="3"><b>Circle</b>: delocalised π, like benzene. Convenient, but hides the polarity.</p>
+  </div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), p. 200 (Kekulé structures accepted); <b>Muetterties</b> (1967), p. 20.</div>
+  <aside class="notes">The formal charges in the Kekulé form (B−, N+) are opposite to the actual partial charges (B δ+, N δ−). This is a frequent source of confusion: formal charges are bookkeeping, not real charge distribution.</aside>
+</section>
+
+<!-- AROMATIC? -->
+<section class="slide" data-title="How aromatic?">
+  <div class="kicker">Borazine · bonding</div>
+  <h2>How aromatic is borazine?</h2>
+  <div class="cols c2" style="gap:44px">
+    <div class="card f" style="border-top:6px solid var(--t)">
+      <h3>Benzene-like</h3>
+      <ul class="b tight">
+        <li>Planar ring; six equal B–N bonds (1.44 Å), shorter than a B–N single bond.</li>
+        <li>Six π electrons in three bonding π MOs.</li>
+        <li>UV bands and ring vibrations close to benzene's.</li>
+      </ul>
+    </div>
+    <div class="card f" style="border-top:6px solid var(--boron)">
+      <h3>Not benzene-like</h3>
+      <ul class="b tight">
+        <li>π electrons concentrated on N: polar B<sup>δ+</sup>–N<sup>δ−</sup> ring.</li>
+        <li>Adds HX, H<sub>2</sub>O, MeOH across the ring; benzene does not.</li>
+        <li>Decomposes slowly as a liquid at room temperature.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box f" style="margin-top:18px"><h4>Verdict</h4><p>Borazine has a delocalised but uneven π system: <b>weakly aromatic</b>, far less than benzene.</p></div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 210, 215–217; <b>Muetterties</b> (1967), p. 20; <b>Li, Zhou, Mak</b> (2008), §13.3.</div>
+  <aside class="notes">A summary slide for the bonding section.</aside>
+</section>
+
+<!-- PREPARATION -->
+<section class="slide" data-title="Preparation of borazine">
+  <div class="kicker">Borazine · preparation</div>
+  <h2>Preparation of borazine</h2>
+  <table class="t eqt">
+    <tr><th>route</th><th>reaction</th><th>note</th></tr>
+    <tr class="f"><td>Stock, Pohland (1926)</td><td>3 B<sub>2</sub>H<sub>6</sub> + 6 NH<sub>3</sub> → 2 B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 12 H<sub>2</sub></td><td class="n">via B<sub>2</sub>H<sub>6</sub>·2NH<sub>3</sub>, 200 °C; 33 %</td></tr>
+    <tr class="f"><td>borohydride (1951)</td><td>3 LiBH<sub>4</sub> + 3 NH<sub>4</sub>Cl → B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 3 LiCl + 9 H<sub>2</sub></td><td class="n">pyrolysis, 300 °C</td></tr>
+    <tr class="f"><td>two steps (1955)</td><td>3 BCl<sub>3</sub> + 3 NH<sub>4</sub>Cl → B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub> + 9 HCl</td><td class="n">chlorobenzene, reflux; 50 %</td></tr>
+    <tr class="f"><td></td><td>2 B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub> + 6 LiBH<sub>4</sub> → 2 B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 6 LiCl + 3 B<sub>2</sub>H<sub>6</sub></td><td class="n">LiBH<sub>4</sub> better than LiAlH<sub>4</sub></td></tr>
+    <tr class="f"><td>modern lab route*</td><td>3 (NH<sub>4</sub>)<sub>2</sub>SO<sub>4</sub> + 6 NaBH<sub>4</sub> → 2 B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 3 Na<sub>2</sub>SO<sub>4</sub> + 18 H<sub>2</sub></td><td class="n">tetraglyme, ≈ 120–140 °C</td></tr>
+  </table>
+  <div class="box f" style="margin-top:16px"><h4>The common pattern</h4><p>A B–H or B–Cl bond meets an N–H bond; H<sub>2</sub> or HCl is lost and the ring closes at about 200 °C.</p></div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 201–204 (Stock &amp; Pohland; Schaeffer, Schaeffer &amp; Schlesinger 1951; Brown &amp; Laubengayer 1955; Schaeffer et al. 1954). *Modern route from memory (Wideman and Sneddon, 1995; Greenwood &amp; Earnshaw): check before quoting; equation balanced here.</div>
+  <aside class="notes">The first equation is the overall stoichiometry of Stock's route, written for the parent compound. Free NH3 with BCl3 gives only traces of borazine; NH4Cl moderates the reaction.</aside>
+</section>
+
+<section class="slide" data-title="From ammonia borane to boron nitride">
+  <div class="kicker">Making borazines · mechanism</div>
+  <h2>From ammonia borane to boron nitride, by losing H<sub>2</sub></h2>
+  <div id="chain-svg"></div>
+  <ul class="b tight" style="margin-top:6px">
+    <li class="f" data-o="6">Wiberg's scheme: adduct → aminoborane → iminoborane → trimer. The free iminoborane HB≡NH is not isolable; Sheldon and Smith suggest cyclisation occurs at an earlier stage, through the saturated trimer.</li>
+    <li class="f" data-o="7">The same sequence explains why NH<sub>3</sub> + B<sub>2</sub>H<sub>6</sub> gives borazine at about 200 °C and <b>boron nitride</b> at about 400 °C.</li>
+  </ul>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 207–209 (Wiberg's condensation chain); <b>Wade</b> (1971), §4-4, Fig. 4-11.</div>
+  <aside class="notes">This is also the chemistry of ammonia borane as a hydrogen store: each step releases H2, and the end product is boron nitride. Regenerating ammonia borane from the spent material is the hard part.</aside>
+</section>
+
+<!-- PHYSICAL -->
+<section class="slide" data-title="Physical properties">
+  <div class="kicker">Borazine · physical properties</div>
+  <h2>Physical properties, beside benzene</h2>
+  <table class="t">
+    <tr><th>property</th><th>borazine B<sub>3</sub>N<sub>3</sub>H<sub>6</sub></th><th>benzene C<sub>6</sub>H<sub>6</sub></th></tr>
+    <tr class="f"><td>appearance</td><td>colourless, mobile liquid</td><td>colourless liquid</td></tr>
+    <tr class="f"><td>m.p. / b.p.</td><td>−56.3 °C / 53 °C</td><td>5.5 °C / 80 °C</td></tr>
+    <tr class="f"><td>ring bond</td><td>B–N 1.44 Å</td><td>C–C 1.40 Å</td></tr>
+    <tr class="f"><td>dipole moment</td><td>zero (D<sub>3h</sub>)</td><td>zero (D<sub>6h</sub>)</td></tr>
+    <tr class="f"><td>strong UV band</td><td>≈ 170 nm</td><td>≈ 180 nm</td></tr>
+    <tr class="f"><td>ring vibration (IR)</td><td>1465 cm⁻¹</td><td>≈ 1480 cm⁻¹</td></tr>
+  </table>
+  <ul class="b tight" style="margin-top:14px">
+    <li class="f">Size- and shape-dependent properties are similar: methylborazines boil at ≈ 0.93 × the absolute b.p. of the matching methylbenzenes.</li>
+    <li class="f">Unlike benzene, liquid borazine is associated at low temperature (viscosity) and slowly decomposes at room temperature.</li>
+  </ul>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 212–217 (Table 1, viscosity, Table 3, UV; the small measured dipole moment was attributed to impurities); benzene values: standard data.</div>
+  <aside class="notes">Physical properties that depend on size and shape are close to benzene's; chemical properties that depend on polarity are very different (next slides).</aside>
+</section>
+
+<section class="slide" data-title="Addition, not substitution">
+  <div class="kicker">Reactions</div>
+  <h2>Addition, not substitution</h2>
+  <div class="cols c2" style="gap:44px">
+    <div id="add-svg"></div>
+    <div>
+      <ul class="b tight">
+        <li class="f" data-o="3">HCl, HBr, H<sub>2</sub>O, MeOH and MeI add <b>three</b> molecules across the ring, even with excess borazine: B<sub>3</sub>N<sub>3</sub>H<sub>6</sub>·3HX.</li>
+        <li class="f" data-o="4">Regiochemistry follows polarity: the <b>nucleophile goes to B</b> (δ+), H to N (δ−).</li>
+        <li class="f" data-o="6">On heating it loses 3 H<sub>2</sub> to give the <b>B-substituted</b> borazine, e.g. B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub>: overall substitution by addition–elimination.</li>
+      </ul>
+      <div class="box f" data-o="7" style="margin-top:10px"><h4>Why all three?</h4><p>Adding the first HX destroys much of the ring's π stabilisation; adding the next two then costs little, so 1 : 1 and 1 : 2 adducts are rare.</p></div>
+    </div>
+  </div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 206, 210 (adducts B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>H<sub>3</sub>·3AD; structure VII).</div>
+  <aside class="notes">Benzene does not add HCl at all under these conditions. The contrast is the clearest evidence that borazine's aromatic stabilisation is much smaller than benzene's.</aside>
+</section>
+
+<!-- OTHER CHEMICAL -->
+<section class="slide" data-title="More chemical properties">
+  <div class="kicker">Borazine · chemical properties</div>
+  <h2>Other reactions of borazine</h2>
+  <table class="t eqt">
+    <tr><th>reaction</th><th>note</th></tr>
+    <tr class="f"><td>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 3 H<sub>2</sub>O → B<sub>3</sub>N<sub>3</sub>H<sub>6</sub>·3H<sub>2</sub>O → B<sub>3</sub>(OH)<sub>3</sub>N<sub>3</sub>H<sub>3</sub> + 3 H<sub>2</sub></td><td class="n">adduct, then gentle heat</td></tr>
+    <tr class="f"><td>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 9 H<sub>2</sub>O → 3 B(OH)<sub>3</sub> + 3 NH<sub>3</sub> + 3 H<sub>2</sub></td><td class="n">complete hydrolysis, on heating*</td></tr>
+    <tr class="f"><td>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 3 MeOH → B<sub>3</sub>N<sub>3</sub>H<sub>6</sub>·3MeOH → B<sub>3</sub>(OMe)<sub>3</sub>N<sub>3</sub>H<sub>3</sub> + 3 H<sub>2</sub></td><td class="n">B-trimethoxyborazine</td></tr>
+    <tr class="f"><td>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 2 Br<sub>2</sub> → adduct (0 °C) → B<sub>3</sub>Br<sub>2</sub>HN<sub>3</sub>H<sub>3</sub> + …</td><td class="n">60–100 °C; HBr lost</td></tr>
+    <tr class="f"><td>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + BCl<sub>3</sub> → B-chloro- and B-dichloroborazine</td><td class="n">room temperature</td></tr>
+    <tr class="f"><td>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + BMe<sub>3</sub> → B-methyl-, B-dimethyl-, B-trimethylborazine</td><td class="n">exchange of H for Me at B</td></tr>
+    <tr class="f"><td>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> → (BNH)<sub><i>x</i></sub> + H<sub>2</sub></td><td class="n">gas, 500 °C: 27 % in 30 min</td></tr>
+  </table>
+  <p class="f small" style="margin-top:12px">Every reaction takes place at <b>boron</b>, the δ+ end. NH<sub>3</sub>, NMe<sub>3</sub> and Me<sub>2</sub>O react only slowly, giving ill-defined products.</p>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 205–206, 209–210. *Complete hydrolysis equation from <b>Greenwood &amp; Earnshaw</b>, 2nd edn, §6.3 (from memory; balanced here).</div>
+  <aside class="notes">Liquid borazine decomposes much faster than the gas, because the decomposition is a condensation between molecules. Controlled pyrolysis gives B6N6H10 and B5N5H8, analogues of biphenyl and naphthalene.</aside>
+</section>
+
+<!-- PART B -->
+<section class="slide divider" data-title="Part B · Derivatives">
+  <div class="kicker">Part B</div>
+  <h2>Derivatives of borazine</h2>
+  <p>Substituents on boron (B-) or on nitrogen (N-).</p>
+  <div class="num">B</div>
+  <aside class="notes">Part B.</aside>
+</section>
+
+<!-- TYPES -->
+<section class="slide" data-title="Types and names">
+  <div class="kicker">Derivatives · types and names</div>
+  <h2>B- and N-substituted borazines</h2>
+  <div id="deriv-gal"></div>
+  <div class="refs">Naming as in <b>Sheldon &amp; Smith</b> (1960), p. 203: "B-trichloro" means one Cl on each of the three B; "N-trimethyl" one Me on each N. Drawings schematic (dashed circle: delocalised π).</div>
+  <aside class="notes">Formulae are written B3X3N3Y3: substituents on boron first, then on nitrogen.</aside>
+</section>
+
+<!-- RING-FORMING ROUTES -->
+<section class="slide" data-title="Ring-forming routes">
+  <div class="kicker">Derivatives · preparation (1)</div>
+  <h2>Making the ring with the substituents already in place</h2>
+  <table class="t eqt">
+    <tr><th>reaction</th><th>product</th></tr>
+    <tr class="f"><td>3 BCl<sub>3</sub> + 3 MeNH<sub>3</sub>Cl → B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>Me<sub>3</sub> + 9 HCl</td><td class="n">B-trichloro-N-trimethyl</td></tr>
+    <tr class="f"><td>3 BCl<sub>3</sub> + 9 PhNH<sub>2</sub> → B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>Ph<sub>3</sub> + 6 PhNH<sub>3</sub>Cl</td><td class="n">B-trichloro-N-triphenyl, 87.5 %</td></tr>
+    <tr class="f"><td>3 LiBH<sub>4</sub> + 3 MeNH<sub>3</sub>Cl → B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Me<sub>3</sub> + 3 LiCl + 9 H<sub>2</sub></td><td class="n">N-trimethyl, &gt; 70 %</td></tr>
+    <tr class="f"><td>3 PhBCl<sub>2</sub> + 9 NH<sub>3</sub> → B<sub>3</sub>Ph<sub>3</sub>N<sub>3</sub>H<sub>3</sub> + 6 NH<sub>4</sub>Cl</td><td class="n">B-triphenyl</td></tr>
+    <tr class="f"><td>3 B(NHR)<sub>3</sub> → B<sub>3</sub>(NHR)<sub>3</sub>N<sub>3</sub>R<sub>3</sub> + 3 RNH<sub>2</sub></td><td class="n">B-tris(alkylamino), 200 °C</td></tr>
+    <tr class="f"><td>methyldiboranes + NH<sub>3</sub>, heat</td><td class="n">B-methylborazines (Schlesinger)</td></tr>
+  </table>
+  <p class="f small" style="margin-top:12px">Higher alkylammonium chlorides need a tertiary amine (Me<sub>3</sub>N, Et<sub>3</sub>N) to take up the HCl.</p>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 202–205 (Jones &amp; Kinney 1939; Schaeffer &amp; Anderson 1949; Turner &amp; Warne 1958; Aubrey &amp; Lappert 1959; Schlesinger et al. 1936, 1938). The PhBCl<sub>2</sub> equation is written from the general scheme given there.</div>
+  <aside class="notes">The substituent on N comes from the amine; the substituent on B comes from the boron halide or borane.</aside>
+</section>
+
+<!-- SUBSTITUTION B-CL -->
+<section class="slide" data-title="Substitution at B–Cl">
+  <div class="kicker">Derivatives · preparation (2)</div>
+  <h2>B-Trichloroborazine as the starting point</h2>
+  <div class="cols" style="grid-template-columns:1.35fr 1fr;gap:34px">
+    <table class="t eqt">
+      <tr><th>B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>R<sub>3</sub> + …</th><th>product</th></tr>
+      <tr class="f"><td>3 LiBH<sub>4</sub></td><td>B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>R<sub>3</sub> (B–H)</td></tr>
+      <tr class="f"><td>3 R'MgX or R'Li</td><td>B<sub>3</sub>R'<sub>3</sub>N<sub>3</sub>R<sub>3</sub> (B-alkyl, B-aryl)</td></tr>
+      <tr class="f"><td>3 NaOR'</td><td>B<sub>3</sub>(OR')<sub>3</sub>N<sub>3</sub>R<sub>3</sub></td></tr>
+      <tr class="f"><td>6 R'<sub>2</sub>NH</td><td>B<sub>3</sub>(NR'<sub>2</sub>)<sub>3</sub>N<sub>3</sub>R<sub>3</sub> + 3 R'<sub>2</sub>NH<sub>2</sub>Cl</td></tr>
+      <tr class="f"><td>Ag or Na salts</td><td>B–CN, –NCS, –Br, –NO<sub>2</sub>, –NO<sub>3</sub></td></tr>
+      <tr class="f"><td>C<sub>6</sub>H<sub>6</sub> / AlCl<sub>3</sub></td><td>B<sub>3</sub>Ph<sub>3</sub>N<sub>3</sub>H<sub>3</sub> (24 %)</td></tr>
+    </table>
+    <div>
+      <div class="ring" data-b="Cl" data-n="H" data-w="300" data-h="230" style="width:300px;margin:0 auto"></div>
+      <ul class="b tight" style="margin-top:10px">
+        <li class="f">Like an acid chloride: easy to make, easy to convert.</li>
+        <li class="f">Partial substitution is possible: with less BuMgBr, B<sub>3</sub>BuCl<sub>2</sub>N<sub>3</sub>Me<sub>3</sub> and B<sub>3</sub>Bu<sub>2</sub>ClN<sub>3</sub>Me<sub>3</sub>.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 206–207 (Schaeffer et al. 1954; Ryschkewitsch, Harris &amp; Sisler 1958; Bradley, Ryschkewitsch &amp; Sisler 1959; Groszos &amp; Stafiej 1958).</div>
+  <aside class="notes">The amination equation is written with 2 mol of amine per Cl, one to take up the HCl. Sheldon and Smith note that stoichiometric amine or even amine hydrochlorides can be used, with lower yields.</aside>
+</section>
+
+<!-- SUBSTITUTION B-H -->
+<section class="slide" data-title="Substitution at B–H">
+  <div class="kicker">Derivatives · preparation (3)</div>
+  <h2>Substitution at B–H, and addition–elimination</h2>
+  <table class="t eqt">
+    <tr><th>reaction</th><th>note</th></tr>
+    <tr class="f"><td>B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Ph<sub>3</sub> + PhMgBr → B<sub>3</sub>H<sub>2</sub>PhN<sub>3</sub>Ph<sub>3</sub> + HMgBr</td><td class="n">stepwise: mono, then di</td></tr>
+    <tr class="f"><td>2 B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 2 BMe<sub>3</sub> → 2 B<sub>3</sub>H<sub>2</sub>MeN<sub>3</sub>H<sub>3</sub> + B<sub>2</sub>H<sub>4</sub>Me<sub>2</sub></td><td class="n">B-methyl (with di- and tri-)</td></tr>
+    <tr class="f"><td>B<sub>3</sub>N<sub>3</sub>H<sub>6</sub> + 3 HCl → B<sub>3</sub>H<sub>6</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub> → B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub> + 3 H<sub>2</sub></td><td class="n">add, then heat</td></tr>
+    <tr class="f"><td>B<sub>3</sub>Me<sub>3</sub>N<sub>3</sub>Me<sub>3</sub>·3HCl → B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>Me<sub>3</sub> + 3 CH<sub>4</sub></td><td class="n">450 °C: Me lost as CH<sub>4</sub></td></tr>
+    <tr class="f"><td>B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Me<sub>3</sub> + 3 H<sub>2</sub>O → B<sub>3</sub>(OH)<sub>3</sub>N<sub>3</sub>Me<sub>3</sub> + 3 H<sub>2</sub></td><td class="n">via the 3 : 1 adduct</td></tr>
+  </table>
+  <div class="box f" style="margin-top:16px"><h4>Two mechanisms</h4><p>HX, H<sub>2</sub>O, MeOH: all three add at once, then H<sub>2</sub> is lost. RMgX, BR<sub>3</sub>, BX<sub>3</sub>: one B–H at a time, giving mono-, di- and tri-substituted products.</p></div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 205–206, 209–211 (Smalley &amp; Stafiej 1959; Schlesinger et al. 1938; Wiberg &amp; Hertwig 1947).</div>
+  <aside class="notes">Sheldon and Smith suggest a bridged four-centre intermediate for the stepwise exchange reactions.</aside>
+</section>
+
+<!-- PROPERTIES TABLE -->
+<section class="slide" data-title="Properties of derivatives">
+  <div class="kicker">Derivatives · physical properties</div>
+  <h2>Physical properties of some borazines</h2>
+  <div class="cols" style="grid-template-columns:1.25fr 1fr;gap:36px">
+    <table class="t">
+      <tr><th>compound</th><th class="c">m.p. / °C</th><th class="c">b.p. / °C</th></tr>
+      <tr class="f"><td>B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>H<sub>3</sub> (borazine)</td><td class="c">−56.3</td><td class="c">53</td></tr>
+      <tr class="f"><td>B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Me<sub>3</sub></td><td class="c">–</td><td class="c">132</td></tr>
+      <tr class="f"><td>B<sub>3</sub>Me<sub>3</sub>N<sub>3</sub>H<sub>3</sub></td><td class="c">31.8</td><td class="c">125</td></tr>
+      <tr class="f"><td>B<sub>3</sub>Me<sub>3</sub>N<sub>3</sub>Me<sub>3</sub></td><td class="c">99</td><td class="c">221</td></tr>
+      <tr class="f"><td>B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub></td><td class="c">84</td><td class="c">192</td></tr>
+      <tr class="f"><td>B<sub>3</sub>Br<sub>3</sub>N<sub>3</sub>H<sub>3</sub></td><td class="c">128–129</td><td class="c">–</td></tr>
+      <tr class="f"><td>B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Ph<sub>3</sub></td><td class="c">160–161</td><td class="c">–</td></tr>
+      <tr class="f"><td>B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>Ph<sub>3</sub></td><td class="c">273–275</td><td class="c">–</td></tr>
+    </table>
+    <ul class="b tight">
+      <li class="f">All are colourless volatile liquids or crystalline solids.</li>
+      <li class="f">Melting points rise with symmetrical substitution and with aryl groups.</li>
+      <li class="f">Substituents on both B and N shorten the ring bonds: B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Me<sub>3</sub> 1.42 Å, B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub> 1.413 Å, against 1.44 Å in borazine.</li>
+    </ul>
+  </div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), Table 1, pp. 213–214 (some b.p. values estimated from vapour pressure) and Table 2, p. 215. A dash means no value is given there.</div>
+  <aside class="notes">N-Methyl donates electron density and B-Cl withdraws it; both increase N→B π donation and so shorten B–N.</aside>
+</section>
+
+<!-- CHEMICAL PROPERTIES OF DERIVATIVES -->
+<section class="slide" data-title="Chemical properties of derivatives">
+  <div class="kicker">Derivatives · chemical properties</div>
+  <h2>How substituents change the chemistry</h2>
+  <div class="cols c2" style="gap:44px">
+    <ul class="b tight">
+      <li class="f"><b>B–Cl compounds</b> are reactive: moist air hydrolyses them, and B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub> slowly loses HCl even at room temperature.</li>
+      <li class="f"><b>Alkyl groups protect the ring</b>: N-alkyl blocks condensation through N–H, so alkyl derivatives are thermally more stable than borazine.</li>
+      <li class="f"><b>Hydrolysis of B-methyl compounds</b> keeps the B–C bonds: B<sub>3</sub>Me<sub>3</sub>N<sub>3</sub>Me<sub>3</sub> + H<sub>2</sub>O → B<sub>3</sub>Me<sub>3</sub>O<sub>3</sub> (a boroxine).</li>
+    </ul>
+    <div>
+      <ul class="b tight">
+        <li class="f"><b>B-amino derivatives</b> lose amine above 300 °C and cross-link to polymers stable to 600 °C.</li>
+        <li class="f"><b>Substitution stays at B</b>: no N-chloro or N-nitro borazine was known in 1960.</li>
+      </ul>
+      <div class="box f" style="margin-top:12px"><h4>π complexes</h4><p>B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>(C<sub>6</sub>H<sub>4</sub>Me)<sub>3</sub> crystallises with one benzene per borazine; π-complexes with arenes were expected but little studied by 1960.</p></div>
+    </div>
+  </div>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960), pp. 205, 207–211.</div>
+  <aside class="notes">The boroxine B3Me3O3 is the oxygen analogue of the borazine ring: B3O3 instead of B3N3.</aside>
+</section>
+
+<!-- 3D DERIVATIVES -->
+<section class="slide" data-title="Derivatives in 3D">
+  <div class="kicker">Derivatives · models</div>
+  <h2>The ring stays planar in the derivatives</h2>
+  <div class="cols" style="grid-template-columns:1fr 1fr;gap:40px">
+    <div>
+      <div class="mol pop" id="dv-view" style="height:460px" data-mol="bz_bcl3" data-scale="0.55" data-yaw="0.2" data-pitch="1.0"><div class="cap" id="dv-cap">B-trichloroborazine</div><div class="hint">drag to rotate</div></div>
+      <div class="symbtns swbtns" data-target="dv-view" data-cap="dv-cap"><button data-key="borazine" data-scale="0.68" data-cap="borazine">B<sub>3</sub>N<sub>3</sub>H<sub>6</sub></button><button class="on" data-key="bz_bcl3" data-scale="0.55" data-cap="B-trichloroborazine">B-Cl<sub>3</sub></button><button data-key="bz_nme3" data-scale="0.55" data-cap="N-trimethylborazine">N-Me<sub>3</sub></button><button data-key="bz_bme3" data-scale="0.55" data-cap="B-trimethylborazine">B-Me<sub>3</sub></button><button data-key="bz_me6" data-scale="0.5" data-cap="hexamethylborazine">Me<sub>6</sub></button></div>
+    </div>
+    <ul class="b tight">
+      <li class="f">Substituents lie in the ring plane, as in substituted benzenes.</li>
+      <li class="f">B–Cl in B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub>: 1.76 Å; N–C in B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Me<sub>3</sub>: 1.48 Å.</li>
+      <li class="f">Compare the saturated adduct B<sub>3</sub>N<sub>3</sub>H<sub>6</sub>·3HCl: a puckered chair, like cyclohexane.</li>
+    </ul>
+  </div>
+  <div class="refs">Distances: <b>Sheldon &amp; Smith</b> (1960), Table 2, p. 215. Models idealised (ring from borazine, standard bond lengths for the substituents).</div>
+  <aside class="notes">Use the buttons to compare B- and N-substitution.</aside>
+</section>
+
+<!-- SUMMARY -->
+<section class="slide" data-title="Summary">
+  <div class="kicker">Summary</div>
+  <h2>Key points</h2>
+  <ul class="b" style="max-width:1400px">
+    <li class="rise" style="--i:0">Borazine is a planar D<sub>3h</sub> ring with equal B–N bonds (1.44 Å), isoelectronic with benzene.</li>
+    <li class="rise" style="--i:1">Its π electrons lie mainly on N: the ring is polar and only weakly aromatic.</li>
+    <li class="rise" style="--i:2">Made by condensing B–H or B–Cl with N–H (B<sub>2</sub>H<sub>6</sub> + NH<sub>3</sub>; LiBH<sub>4</sub> + NH<sub>4</sub>Cl; BCl<sub>3</sub> + NH<sub>4</sub>Cl, then LiBH<sub>4</sub>).</li>
+    <li class="rise" style="--i:3">Physically benzene-like; chemically it adds HX and H<sub>2</sub>O across the ring, nucleophile to B.</li>
+    <li class="rise" style="--i:4">Derivatives: N-substituents from the amine, B-substituents from the boron reagent or by replacing B–Cl.</li>
+  </ul>
+  <div class="refs"><b>Sheldon &amp; Smith</b> (1960); <b>Muetterties</b> (1967), ch. 1.</div>
+  <aside class="notes">Ask students to write the product of B3Cl3N3H3 + 3 MeMgBr.</aside>
+</section>
+
+<!-- QUESTIONS -->
+<section class="slide qa" data-title="Check your understanding">
+  <div class="kicker">Check your understanding</div>
+  <h2>Questions <span class="small" style="font-family:var(--sans)">(press → to reveal each answer)</span></h2>
+  <div class="cols c2" style="gap:56px">
+    <div>
+      <div class="q">1. Why does HCl add to borazine but not to benzene?</div>
+      <div class="a f">The ring is polar (B<sup>δ+</sup>, N<sup>δ−</sup>) and its π stabilisation is small: Cl⁻ goes to B, H⁺ to N.</div>
+      <div class="q">2. How would you make B-trimethyl-N-trimethylborazine?</div>
+      <div class="a f">BCl<sub>3</sub> + MeNH<sub>3</sub>Cl → B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>Me<sub>3</sub>; then 3 MeMgBr.</div>
+    </div>
+    <div>
+      <div class="q">3. Why does Kekulé-type borazine carry N⁺ and B⁻ formal charges?</div>
+      <div class="a f">The N=B π bonds are dative from N; formal charges are bookkeeping, opposite to the real partial charges.</div>
+      <div class="q">4. Which is the electrophilic site in borazine?</div>
+      <div class="a f">Boron: all substitutions and additions bring the nucleophile to B.</div>
+    </div>
+  </div>
+  <div class="refs">Based on these notes.</div>
+  <aside class="notes">Allow a minute per question.</aside>
+</section>
+
+<!-- REFERENCES -->
+<section class="slide" data-title="References">
+  <div class="kicker">References</div>
+  <h2 style="margin-bottom:14px">Sources</h2>
+  <div class="cols c2" style="gap:40px;color:var(--ink2)">
+    <p style="font-size:23px;line-height:1.45"><b style="color:var(--navy)">Reviews and books</b><br>
+    J. C. Sheldon, B. C. Smith, "The borazoles", <i>Q. Rev. Chem. Soc.</i> 1960, <b>14</b>, 200–219.<br>
+    E. L. Muetterties (ed.), <i>The Chemistry of Boron and its Compounds</i>, Wiley, 1967, ch. 1.<br>
+    K. Wade, <i>Electron Deficient Compounds</i>, Nelson, 1971, §4-4.<br>
+    W.-K. Li, G.-D. Zhou, T. C. W. Mak, <i>Advanced Structural Inorganic Chemistry</i>, OUP, 2008, §13.3.<br>
+    N. N. Greenwood, A. Earnshaw, <i>Chemistry of the Elements</i>, 2nd edn, §6.3.</p>
+    <p style="font-size:23px;line-height:1.45"><b style="color:var(--navy)">Primary papers</b><br>
+    Stock &amp; Pohland, <i>Ber.</i> 1926, <b>59</b>, 2215 · Jones &amp; Kinney, <i>JACS</i> 1939, <b>61</b>, 1378 · Schaeffer &amp; Anderson, <i>JACS</i> 1949, <b>71</b>, 2143 · Brown &amp; Laubengayer, <i>JACS</i> 1955, <b>77</b>, 3699 · Schaeffer et al., <i>JACS</i> 1954, <b>76</b>, 3303 · Wideman &amp; Sneddon, <i>Inorg. Chem.</i> 1995, <b>34</b>, 1002 (recalled).</p>
+  </div>
+  <aside class="notes">Full reference list.</aside>
+</section>
+
+<div id="counter"></div>
+</div></div>
+<div id="hint">← → or click · O overview · P presenter view (notes) · F fullscreen</div>
+<div id="overview"><h5>Slides — Borazine and its Derivatives — Condensed</h5><div class="grid"></div></div>
+<script>
+/* ===================== slide engine ===================== */
+const stage=document.getElementById('stage');
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);stage.style.transform=`scale(${s})`;}
+addEventListener('resize',fit);fit();
+function frags(i){const a=[...slides[i].querySelectorAll('.f')];
+  if(a.some(f=>f.dataset.o))return a.map((f,k)=>[f,f.dataset.o?+f.dataset.o:1000+k]).sort((p,q)=>p[1]-q[1]).map(p=>p[0]);return a;}
+function setOrder(list){list.forEach((e,k)=>{if(e)e.dataset.o=k+1;});}
+function show(i,step){
+  if(window.ANIM===false)step='all';
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  cur=i;
+  const fr=frags(i);
+  fr.forEach((f,k)=>{f.classList.toggle('on',step==='all'?true:false);});
+  slides[i].querySelectorAll('.dead').forEach(e=>e.classList.remove('dead'));
+  slides[i].querySelectorAll('.winc,.win').forEach(e=>e.classList.remove('winc','win'));
+  if(step==='all') fr.forEach(applyHooks);
+  document.getElementById('bar').style.width=((i+1)/slides.length*100)+'%';
+  const c=document.getElementById('counter');c.textContent=(i+1)+' / '+slides.length;
+  c.style.color='';
+  document.getElementById('deckname').style.color=slides[i].classList.contains('divider')?'#9fb0c9':'';
+  location.hash='#'+(i+1);
+  Mol.activate(slides[i]);
+  updatePresenter();
+}
+function applyHooks(f){
+  const sl=slides[cur];
+  if(f.dataset.kill){sl.querySelectorAll(`[data-col="${f.dataset.kill}"]`).forEach(e=>e.classList.add('dead'));}
+  if(f.dataset.win){sl.querySelectorAll('[data-col="C"],[data-col="D"]').forEach(e=>{e.tagName==='TH'?e.classList.add('win'):e.classList.add('winc')});}
+}
+function unHooks(f){
+  const sl=slides[cur];
+  if(f.dataset.kill){sl.querySelectorAll(`[data-col="${f.dataset.kill}"]`).forEach(e=>e.classList.remove('dead'));}
+  if(f.dataset.win){sl.querySelectorAll('.winc,.win').forEach(e=>e.classList.remove('winc','win'));}
+}
+function next(){if(window.ANIM===false){if(cur<slides.length-1)show(cur+1);return;}const fr=frags(cur);const n=fr.find(f=>!f.classList.contains('on'));if(n){n.classList.add('on');applyHooks(n);updatePresenter();}else if(cur<slides.length-1)show(cur+1);}
+function prev(){if(window.ANIM===false){if(cur>0)show(cur-1,'all');return;}const fr=frags(cur).filter(f=>f.classList.contains('on'));if(fr.length){const l=fr[fr.length-1];l.classList.remove('on');unHooks(l);updatePresenter();}else if(cur>0)show(cur-1,'all');}
+function onKey(e){if(e.ctrlKey||e.metaKey||e.altKey)return;const tg=e.target;if(tg&&(tg.isContentEditable||(/^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName)&&!/^(range|button|checkbox|radio)$/.test(tg.type))))return;
+  if(document.getElementById('overview').classList.contains('show')){if(e.key==='Escape'||e.key==='o'||e.key==='O')toggleOv();return;}
+  if(['ArrowRight','PageDown',' ','Enter','ArrowDown'].includes(e.key)){e.preventDefault();next();}
+  else if(['ArrowLeft','PageUp','Backspace','ArrowUp'].includes(e.key)){e.preventDefault();prev();}
+  else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1,'all');
+  else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+  else if(e.key==='o'||e.key==='O')toggleOv();
+  else if(e.key==='p'||e.key==='P')openPresenter();
+  else if(e.key==='a'||e.key==='A'||e.code==='KeyA')toggleAnim();
+}
+window.ANIM=false;(function(){const ap=()=>document.body.classList.add('noanim');document.body?ap():addEventListener('DOMContentLoaded',ap);})();
+function toggleAnim(){return;window.ANIM=!window.ANIM;try{localStorage.setItem('deckAnim',window.ANIM?'on':'off');}catch(_){}if(!window.ANIM&&typeof cur==='number')show(cur,'all');document.body.classList.toggle('noanim',!window.ANIM);dispatchEvent(new CustomEvent('animtoggle',{detail:window.ANIM}));
+  let t=document.getElementById('animtoast');if(!t){t=document.createElement('div');t.id='animtoast';document.body.appendChild(t);}t.textContent=window.ANIM?'Animation on: one item per click  (press A)':'Animation off: whole slide at once  (press A)';t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1400);}
+addEventListener('keydown',onKey);
+let dragMoved=false;
+stage.addEventListener('click',e=>{if(dragMoved){dragMoved=false;return;}if(e.target.closest('.mol,button,.symbtns,#modes-grid'))return;const r=stage.getBoundingClientRect();(e.clientX-r.left)<r.width*0.25?prev():next();});
+/* overview */
+const ovg=document.querySelector('#overview .grid');
+slides.forEach((s,k)=>{const b=document.createElement('button');b.innerHTML=`<span>${k+1}</span>${s.dataset.title||''}`;b.onclick=()=>{toggleOv();show(k);};ovg.appendChild(b);});
+function toggleOv(){const o=document.getElementById('overview');o.classList.toggle('show');[...ovg.children].forEach((b,k)=>b.classList.toggle('cur',k===cur));}
+
+/* ===================== SVG helpers ===================== */
+const NS='http://www.w3.org/2000/svg';
+function E(tag,attrs={},parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!==undefined)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+function svgRoot(host,w,h){const s=E('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%'});host.appendChild(s);
+  const d=E('defs',{},s);
+  const g1=E('radialGradient',{id:host.id+'gB',cx:.35,cy:.35},d);E('stop',{offset:0,'stop-color':'#FBD9C9'},g1);E('stop',{offset:1,'stop-color':'#D9673E'},g1);
+  const g2=E('radialGradient',{id:host.id+'gH',cx:.35,cy:.35},d);E('stop',{offset:0,'stop-color':'#ffffff'},g2);E('stop',{offset:1,'stop-color':'#C9CFD9'},g2);
+  const g3=E('radialGradient',{id:host.id+'gHb',cx:.35,cy:.35},d);E('stop',{offset:0,'stop-color':'#E3F5F2'},g3);E('stop',{offset:1,'stop-color':'#1F8A80'},g3);
+  return s;}
+function atom(s,host,x,y,lab,kind,r){const g=E('g',{},s);const id=host.id;
+  E('circle',{cx:x,cy:y,r:r||(kind==='B'?30:20),fill:`url(#${id}g${kind})`,stroke:kind==='B'?'#B24E2A':(kind==='Hb'?'#16675F':'#8B93A3'),'stroke-width':1.5},g);
+  E('text',{x:x,y:y+(kind==='B'?10:7),'text-anchor':'middle','font-family':'Source Sans 3, Segoe UI','font-weight':700,'font-size':kind==='B'?28:20,fill:kind==='B'?'#fff':(kind==='Hb'?'#fff':'#1D2330')},g,lab);return g;}
+/* 2D bridged B2H6 coordinates */
+const P={B1:[190,170],B2:[350,170],Hb1:[270,82],Hb2:[270,258],Ht1:[95,95],Ht2:[95,245],Ht3:[445,95],Ht4:[445,245]};
+
+
+function subText(g,x,y,str,col){const t=E('text',{x,y,'text-anchor':'middle','font-family':'Source Sans 3, Segoe UI','font-size':17,fill:col,'font-weight':700},g);
+  str.split(/(_[a-z])/).forEach(part=>{if(part.startsWith('_')){E('tspan',{'baseline-shift':'sub','font-size':12},t,part[1]);}else if(part){E('tspan',{},t,part);}});return t;}
+
+/* ===== electron-dot grid renderer ===== */
+function lewisGrid(id,lines,masks,o={}){const h=document.getElementById(id);if(!h)return;const cw=o.cw||30,rh=o.rh||34,fs=o.fs||30;
+  const W=Math.max(...lines.map(l=>[...l].length))*cw+20,H=lines.length*rh+10;
+  const s=E('svg',{viewBox:`0 0 ${W} ${H}`,width:o.width||'100%',class:'lg'});h.appendChild(s);
+  const C={o:'#D9673E',b:'#2B5DB8',r:'#C2413A',p:'#6B4FA3',g:'#7A8294',t:'#1F8A80'};
+  lines.forEach((ln,r)=>{const mk=[...(masks&&masks[r]||'')];[...ln].forEach((ch,c)=>{const x=10+c*cw+cw/2,y=5+r*rh+rh/2;const col=C[mk[c]]||(ch==='B'?'#D9673E':'#1D2330');
+    if(ch===' ')return;
+    if(ch===':'){E('circle',{cx:x,cy:y-7,r:4.2,fill:col},s);E('circle',{cx:x,cy:y+7,r:4.2,fill:col},s);}
+    else if(ch==='"'){E('circle',{cx:x-7,cy:y,r:4.2,fill:col},s);E('circle',{cx:x+7,cy:y,r:4.2,fill:col},s);}
+    else if(ch==='.'){E('circle',{cx:x,cy:y,r:4.6,fill:col},s);}
+    else if(ch==='~'){E('text',{x,y:y+fs*0.35,'text-anchor':'middle','font-size':fs,fill:col},s,'↔');}
+    else E('text',{x,y:y+fs*0.35,'text-anchor':'middle','font-size':ch==='⁺'||ch==='⁻'?fs*0.8:fs,fill:col},s,ch);});});}
+
+(function(){
+/* ================= Deck 9: borazine & BN ================= */
+const FF='Source Sans 3, Segoe UI';
+const COL={ink:'#1D2330',ink2:'#4A5263',mut:'#7A8294',b:'#D9673E',t:'#1F8A80',n:'#22395B',nb:'#2B5DB8',v:'#6B4FA3',r:'#C2413A',g:'#9AA3B2'};
+function G(par,o){const a={class:'f fade'};if(o!==undefined)a['data-o']=o;return E('g',a,par);}
+function TX(par,x,y,t,o={}){const fs=o['font-size']||20;const el=E('text',Object.assign({x,y,'text-anchor':'middle','font-family':FF,'font-size':fs,'font-weight':600,fill:COL.ink},o),par);
+  t.split(/(_[0-9a-zn+−-]+|\^[0-9a-z+−δ-]+)/).forEach(p=>{if(p.startsWith('_'))E('tspan',{'baseline-shift':'sub','font-size':fs*0.68},el,p.slice(1));else if(p.startsWith('^'))E('tspan',{'baseline-shift':'super','font-size':fs*0.68},el,p.slice(1));else if(p)E('tspan',{},el,p);});return el;}
+function ln(par,x1,y1,x2,y2,c,w,dash){return E('line',{x1,y1,x2,y2,stroke:c||COL.g,'stroke-width':w||3,'stroke-dasharray':dash||'none','stroke-linecap':'round'},par);}
+function at(par,x,y,lab,r){r=r||17;const pal={B:['#F4A27E','#C9562F','#fff'],N:['#9DB7EA','#2B5DB8','#fff'],C:['#C9CDD5','#4A5263',COL.ink],H:['#fff','#B9C0CC',COL.ink2],Cl:['#C9EBC9','#2F8A4C',COL.ink],X:['#C9EBC9','#2F8A4C',COL.ink]}[lab]||['#fff','#999',COL.ink];
+  E('circle',{cx:x,cy:y,r,fill:pal[0],stroke:pal[1],'stroke-width':2.4},par);TX(par,x,y+r*0.38,lab,{'font-size':r*(lab.length>1?0.82:1.05),fill:pal[2],'font-weight':700});}
+function arr(par,x1,y1,x2,y2,c,lab,lo){c=c||COL.ink2;const id='a'+Math.random().toString(36).slice(2,7);const d=E('defs',{},par);const m=E('marker',{id,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto'},d);E('path',{d:'M0 0L10 5L0 10z',fill:c},m);
+  E('line',{x1,y1,x2,y2,stroke:c,'stroke-width':2.6,'marker-end':`url(#${id})`},par);if(lab)TX(par,(x1+x2)/2+(lo?lo[0]:0),(y1+y2)/2+(lo?lo[1]:-10),lab,{'font-size':16,fill:c});}
+
+/* ---- 3D models ---- */
+(function(){const X=window.EXTRA_MOLS=window.EXTRA_MOLS||{};
+  // borazine
+  const a=[],b=[];for(let i=0;i<6;i++){const t=i*Math.PI/3;const el=i%2?'N':'B';a.push([el,1.44*Math.cos(t),0,1.44*Math.sin(t)]);}
+  for(let i=0;i<6;i++)b.push([i,(i+1)%6]);
+  for(let i=0;i<6;i++){const t=i*Math.PI/3;const r=1.44+(i%2?1.01:1.19);a.push(['H',r*Math.cos(t),0,r*Math.sin(t)]);b.push([i,6+i]);}
+  X.borazine={atoms:a,bonds:b};
+  // h-BN: two layers of a 24-atom patch (B over N)
+  const d=1.45,ha=[],hb=[];const pts=[];
+  for(let i=-3;i<=3;i++)for(let j=-3;j<=3;j++){const x=d*Math.sqrt(3)*(i+j/2),z=d*1.5*j;[[0,0,'B'],[0,d,'N']].forEach(([dx,dz,el])=>{const P=[x+dx,z+dz];if(Math.hypot(P[0],P[1])<3.3)pts.push([el,P[0],P[1]]);});}
+  const L=(y,swap)=>{const off=ha.length;pts.forEach(p=>ha.push([swap?(p[0]==='B'?'N':'B'):p[0],p[1],y,p[2]]));for(let i=0;i<pts.length;i++)for(let k=i+1;k<pts.length;k++){if(Math.abs(Math.hypot(pts[i][1]-pts[k][1],pts[i][2]-pts[k][2])-d)<0.05)hb.push([off+i,off+k]);}};
+  L(1.65,false);L(-1.65,true);X.hbn={atoms:ha,bonds:hb};
+  // c-BN: zinc blende fragment
+  const A=3.62,ca=[],cb=[];const fcc=[[0,0,0],[0.5,0.5,0],[0.5,0,0.5],[0,0.5,0.5]];
+  for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++)for(let k=-1;k<=1;k++)fcc.forEach(f=>{const p=[(f[0]+i)*A,(f[1]+j)*A,(f[2]+k)*A];const q=p.map(v=>v+A/4);
+    [['B',p],['N',q]].forEach(([el,P])=>{const c=P.map(v=>v-A/8);if(Math.hypot(...c)<3.3)ca.push([el,c[0],c[1],c[2]]);});});
+  for(let i=0;i<ca.length;i++)for(let k=i+1;k<ca.length;k++){if(ca[i][0]!==ca[k][0]&&Math.abs(Math.hypot(ca[i][1]-ca[k][1],ca[i][2]-ca[k][2],ca[i][3]-ca[k][3])-A*Math.sqrt(3)/4)<0.05)cb.push([i,k]);}
+  X.cbn={atoms:ca,bonds:cb};
+})();
+(function(){const btns=document.getElementById('bn-btns');if(!btns)return;
+  [['h-BN','hbn','h-BN: two layers, B over N',0.55],['c-BN','cbn','c-BN: zinc blende (every atom tetrahedral)',0.6]].forEach(([t,k,cap,sc],i)=>{const e=document.createElement('button');e.textContent=t;if(!i)e.classList.add('on');btns.appendChild(e);
+    e.addEventListener('click',ev=>{ev.stopPropagation();const v=document.getElementById('bn-view');if(typeof Mol!=='undefined'){Mol.set(v,k);v.dataset.scale=sc;}document.getElementById('bn-cap').textContent=cap;btns.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===e));});});})();
+
+/* ---- isoelectronic ---- */
+(function(){const h=document.getElementById('iso-svg');if(!h)return;const s=svgRoot(h,700,520);
+  const g1=G(s,1);TX(g1,350,40,'C=C : 4 + 4 valence electrons',{'font-size':20});ln(g1,270,110,430,110,COL.ink,5);ln(g1,270,124,430,124,COL.ink,5);at(g1,250,117,'C',30);at(g1,450,117,'C',30);
+  const g2=G(s,2);TX(g2,350,220,'B–N : 3 + 5 valence electrons',{'font-size':20});ln(g2,270,300,430,300,COL.ink,5);at(g2,250,300,'B',30);at(g2,450,300,'N',30);
+  TX(g2,250,262,'δ+',{'font-size':22,fill:COL.b});TX(g2,450,262,'δ−',{'font-size':22,fill:COL.nb});
+  const g3=G(s,5);E('ellipse',{cx:250,cy:380,rx:16,ry:40,fill:'#F6B394','fill-opacity':.25,stroke:COL.b,'stroke-width':2,'stroke-dasharray':'5 4'},g3);E('ellipse',{cx:450,cy:380,rx:16,ry:40,fill:'#9DB7EA','fill-opacity':.7,stroke:COL.nb,'stroke-width':2},g3);
+  TX(g3,250,450,'empty p',{'font-size':17,fill:COL.b});TX(g3,450,450,'lone pair',{'font-size':17,fill:COL.nb});
+  E('path',{d:'M425 360 Q350 320 275 360',fill:'none',stroke:COL.v,'stroke-width':3},g3);E('path',{d:'M285 350 L272 362 L290 366',fill:'none',stroke:COL.v,'stroke-width':3},g3);TX(g3,350,325,'π donation N → B',{'font-size':17,fill:COL.v});
+  TX(g3,350,500,'σ polarity B → N partly offset by π donation N → B',{'font-size':17,fill:COL.ink2,'font-weight':500});})();
+
+/* ---- history timeline ---- */
+(function(){const h=document.getElementById('hist-svg');if(!h)return;const s=svgRoot(h,760,560);
+  const ev=[[1889,'Rideal: "BClNPh" from BCl_3 + aniline',COL.mut],[1926,'Stock & Pohland: B_3N_3H_6 from B_2H_6·2NH_3',COL.b],[1931,'Stock & Wierl: planar ring (electron diffraction)',COL.n],[1939,'Jones & Kinney: Rideal\'s solid is a trimer',COL.mut],[1940,'Wiberg & Bolz: "inorganic benzene", Borazol',COL.v]];
+  ln(s,90,40,90,520,'#C9CED8',4);
+  ev.forEach(([y,t,c],i)=>{const g=G(s,i);const yy=60+i*110;E('circle',{cx:90,cy:yy,r:11,fill:c},g);TX(g,120,yy-6,String(y),{'font-size':22,'text-anchor':'start',fill:c,'font-family':'JetBrains Mono, monospace'});TX(g,120,yy+24,t,{'font-size':19,'text-anchor':'start',fill:COL.ink2,'font-weight':500});});})();
+
+/* ---- π MO comparison ---- */
+(function(){const h=document.getElementById('pi-svg');if(!h)return;const s=svgRoot(h,720,560);
+  const lev=(g,x,y,w,c,occ)=>{ln(g,x-w/2,y,x+w/2,y,c,4);if(occ)[-1,1].forEach(dd=>{const xx=x+dd*7;E('path',{d:dd<0?`M${xx} ${y+10}V${y-12}m-5 6l5-6l5 6`:`M${xx} ${y-12}V${y+10}m-5-6l5 6l5-6`,stroke:COL.r,'stroke-width':2,fill:'none'},g);});};
+  const g1=G(s,2);TX(g1,190,36,'benzene',{'font-size':22});const bx=190;
+  lev(g1,bx,420,60,COL.ink,true);lev(g1,bx-38,330,60,COL.ink,true);lev(g1,bx+38,330,60,COL.ink,true);lev(g1,bx-38,200,60,COL.mut);lev(g1,bx+38,200,60,COL.mut);lev(g1,bx,120,60,COL.mut);
+  ln(g1,40,265,340,265,'#C9CED8',2,'6 5');TX(g1,60,258,'α',{'font-size':18,fill:COL.mut,'text-anchor':'start'});TX(g1,bx,480,'six identical C 2p',{'font-size':17,fill:COL.ink2,'font-weight':500});
+  const g2=G(s,3);TX(g2,520,36,'borazine',{'font-size':22});const zx=520;
+  lev(g2,zx,445,60,COL.nb,true);lev(g2,zx-38,385,60,COL.nb,true);lev(g2,zx+38,385,60,COL.nb,true);lev(g2,zx-38,170,60,COL.b);lev(g2,zx+38,170,60,COL.b);lev(g2,zx,100,60,COL.b);
+  TX(g2,zx+90,392,'mainly N',{'font-size':17,fill:COL.nb,'text-anchor':'start'});TX(g2,zx+90,176,'mainly B',{'font-size':17,fill:COL.b,'text-anchor':'start'});
+  const g3=G(s,4);E('path',{d:'M420 380 L420 180',stroke:COL.r,'stroke-width':2.4,'stroke-dasharray':'6 5'},g3);TX(g3,410,285,'larger gap',{'font-size':17,fill:COL.r,'text-anchor':'end'});TX(g3,zx,500,'N 2p lower, B 2p higher',{'font-size':17,fill:COL.ink2,'font-weight':500});
+  E('path',{d:'M30 470 V60',stroke:COL.ink2,'stroke-width':2},s);E('path',{d:'M22 76 L30 58 L38 76',fill:'none',stroke:COL.ink2,'stroke-width':2},s);TX(s,30,495,'E',{'font-size':18,'font-style':'italic'});})();
+
+/* ---- resonance / representations ---- */
+(function(){const h=document.getElementById('res-svg');if(!h)return;const s=svgRoot(h,1500,400);
+  const ring=(g,cx,cy,R,mode)=>{const P=[];for(let i=0;i<6;i++){const t=-Math.PI/2+i*Math.PI/3;P.push([cx+R*Math.cos(t),cy+R*Math.sin(t),i%2?'N':'B']);}
+    for(let i=0;i<6;i++){const p=P[i],q=P[(i+1)%6];ln(g,p[0],p[1],q[0],q[1],COL.ink,3.5);
+      const dbl=mode==='k1'?(i%2===1):mode==='k2'?(i%2===0):false;
+      if(dbl){const mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2;const ix=(cx-mx)*0.22,iy=(cy-my)*0.22;ln(g,p[0]+ix+(q[0]-p[0])*0.15,p[1]+iy+(q[1]-p[1])*0.15,q[0]+ix-(q[0]-p[0])*0.15,q[1]+iy-(q[1]-p[1])*0.15,COL.v,3.5);}}
+    if(mode==='c')E('circle',{cx,cy,r:R*0.55,fill:'none',stroke:COL.v,'stroke-width':3.5},g);
+    P.forEach(([x,y,el])=>{const ox=(x-cx)*0.62,oy=(y-cy)*0.62;ln(g,x,y,x+ox,y+oy,COL.g,2.5);at(g,x+ox,y+oy,'H',11);
+      at(g,x,y,el,19);
+      if(mode==='s'&&el==='N'){const ox2=(x-cx)*0.22,oy2=(y-cy)*0.22;}
+      if(mode==='k1'||mode==='k2'){TX(g,x+(x-cx)*0.25+(el==='B'?-14:14),y+(y-cy)*0.25-12,el==='B'?'−':'+',{'font-size':20,fill:el==='B'?COL.b:COL.nb});}});
+    if(mode==='s'){P.filter(p=>p[2]==='N').forEach(([x,y])=>{const ux=(x-cx)/R,uy=(y-cy)/R;const px=-uy,py=ux;[[-1],[1]].forEach(([k])=>E('circle',{cx:x-ux*0+px*k*0+ (-uy*0),cy:y,r:0},g));
+      E('circle',{cx:x+px*24,cy:y+py*24-0,r:3.5,fill:COL.nb},g);E('circle',{cx:x+px*24+ux*8,cy:y+py*24+uy*8,r:3.5,fill:COL.nb},g);});}};
+  const g1=G(s,1);ring(g1,260,190,100,'s');TX(g1,260,392,'σ only, N lone pairs',{'font-size':18,fill:COL.ink2});
+  const g2=G(s,2);ring(g2,640,190,100,'k1');ring(g2,960,190,100,'k2');TX(g2,800,195,'↔',{'font-size':40,fill:COL.v});TX(g2,800,392,'two Kekulé-type forms (formal B⁻, N⁺)',{'font-size':18,fill:COL.ink2});
+  const g3=G(s,3);ring(g3,1290,190,100,'c');TX(g3,1290,392,'delocalised',{'font-size':18,fill:COL.ink2});})();
+
+/* ---- condensation chain ---- */
+(function(){const h=document.getElementById('chain-svg');if(!h)return;const s=svgRoot(h,1500,330);
+  const box=(g,x,t1,t2,c)=>{E('rect',{x:x-110,y:70,width:220,height:120,rx:16,fill:'#fff',stroke:c,'stroke-width':2.6},g);TX(g,x,122,t1,{'font-size':23,fill:c});TX(g,x,158,t2,{'font-size':16,fill:COL.ink2,'font-weight':500});};
+  const items=[['H_3N·BH_3','ammonia borane',COL.n],['(H_2NBH_2)_x','aminoborane',COL.t],['(HNBH)_3','borazine',COL.b],['polyborazylene','(BNH)_x',COL.v],['h-BN','boron nitride',COL.ink]];
+  items.forEach(([a,b,c],i)=>{const g=G(s,i+1);const x=140+i*305;box(g,x,a,b,c);if(i){arr(g,x-195,130,x-112,130,COL.r,'− H_2',[0,-12]);}});
+  const g6=G(s,5.5);TX(g6,750,250,'T rises →  ≈ 100 °C … 200 °C … 400 °C and above',{'font-size':18,fill:COL.mut,'font-weight':500});
+  TX(g6,750,285,'each step: N–H + H–B → N–B + H_2',{'font-size':19,fill:COL.r});})();
+
+/* ---- HCl addition ---- */
+(function(){const h=document.getElementById('add-svg');if(!h)return;const s=svgRoot(h,700,560);
+  const hexP=(cx,cy,R)=>{const P=[];for(let i=0;i<6;i++){const t=-Math.PI/2+i*Math.PI/3;P.push([cx+R*Math.cos(t),cy+R*Math.sin(t),i%2?'N':'B']);}return P;};
+  const g1=G(s,1);let P=hexP(170,150,80);P.forEach((p,i)=>{const q=P[(i+1)%6];ln(g1,p[0],p[1],q[0],q[1],COL.ink,3.5);});E('circle',{cx:170,cy:150,r:42,fill:'none',stroke:COL.v,'stroke-width':3},g1);
+  P.forEach(([x,y,el])=>at(g1,x,y,el,16));TX(g1,170,270,'B_3N_3H_6',{'font-size':20});
+  const g2=G(s,2);arr(g2,290,150,410,150,COL.ink2,'+ 3 HCl');
+  P=hexP(540,150,80);P.forEach((p,i)=>{const q=P[(i+1)%6];ln(g2,p[0],p[1],q[0],q[1],COL.ink,3.5);});
+  P.forEach(([x,y,el])=>{const ux=(x-540)/80,uy=(y-150)/80;if(el==='B'){ln(g2,x,y,x+ux*44,y+uy*44,'#2F8A4C',3);at(g2,x+ux*48,y+uy*48,'Cl',15);}else{ln(g2,x,y,x+ux*40,y+uy*40,COL.g,3);at(g2,x+ux*42,y+uy*42,'H',11);}at(g2,x,y,el,16);});
+  TX(g2,540,290,'B_3N_3H_6·3HCl (chair, saturated)',{'font-size':18});
+  const g3=G(s,6);arr(g3,540,320,540,400,COL.r,'heat, − 3 H_2',[80,6]);
+  P=hexP(540,470,62);P.forEach((p,i)=>{const q=P[(i+1)%6];ln(g3,p[0],p[1],q[0],q[1],COL.ink,3);});E('circle',{cx:540,cy:470,r:32,fill:'none',stroke:COL.v,'stroke-width':2.6},g3);
+  P.forEach(([x,y,el])=>{if(el==='B'){const ux=(x-540)/62,uy=(y-470)/62;ln(g3,x,y,x+ux*36,y+uy*36,'#2F8A4C',3);at(g3,x+ux*40,y+uy*40,'Cl',13);}at(g3,x,y,el,14);});
+  TX(g3,250,470,'B-trichloroborazine',{'font-size':19,fill:COL.r});
+  const g4=G(s,4);TX(g4,170,330,'Cl⁻ → B (δ+)',{'font-size':18,fill:'#2F8A4C'});TX(g4,170,358,'H⁺ → N (δ−)',{'font-size':18,fill:COL.nb});})();
+
+/* ---- band gap ---- */
+(function(){const h=document.getElementById('band-svg');if(!h)return;const s=svgRoot(h,720,540);
+  const band=(g,x,y1,y2,c,fill,lab)=>{E('rect',{x:x-90,y:y1,width:180,height:y2-y1,rx:8,fill,stroke:c,'stroke-width':2.4},g);if(lab)TX(g,x,(y1+y2)/2+7,lab,{'font-size':19,fill:c});};
+  const g1=G(s,1);TX(g1,190,40,'graphite',{'font-size':22});band(g1,190,80,250,COL.mut,'#F2F4F7','π* (empty)');band(g1,190,250,420,COL.ink,'#C9CED8','π (filled)');TX(g1,190,470,'bands touch: black, conducting',{'font-size':17,fill:COL.ink2,'font-weight':500});
+  const g2=G(s,2);TX(g2,520,40,'h-BN',{'font-size':22});band(g2,520,70,180,COL.b,'#FDEBE2','π* (on B)');band(g2,520,320,430,COL.nb,'#DCE5FA','π (on N)');
+  const g3=G(s,3);E('path',{d:'M630 185 V315',stroke:COL.r,'stroke-width':3},g3);E('path',{d:'M622 200L630 182L638 200M622 300L630 318L638 300',fill:'none',stroke:COL.r,'stroke-width':3},g3);TX(g3,645,258,'≈ 6 eV',{'font-size':22,fill:COL.r,'text-anchor':'start'});
+  TX(g3,520,470,'large gap: white, insulating',{'font-size':17,fill:COL.ink2,'font-weight':500});})();
+
+/* ---- azaborines ---- */
+(function(){const h=document.getElementById('aza-svg');if(!h)return;const s=svgRoot(h,700,520);
+  const ring=(g,cx,cy,R,els,dbl)=>{const P=[];for(let i=0;i<6;i++){const t=-Math.PI/2+i*Math.PI/3;P.push([cx+R*Math.cos(t),cy+R*Math.sin(t),els[i]]);}
+    for(let i=0;i<6;i++){const p=P[i],q=P[(i+1)%6];ln(g,p[0],p[1],q[0],q[1],COL.ink,3.5);if(dbl.includes(i)){const mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2;const ix=(cx-mx)*0.2,iy=(cy-my)*0.2;ln(g,p[0]+ix+(q[0]-p[0])*0.15,p[1]+iy+(q[1]-p[1])*0.15,q[0]+ix-(q[0]-p[0])*0.15,q[1]+iy-(q[1]-p[1])*0.15,COL.ink,3.5);}}
+    P.forEach(([x,y,el])=>{const ox=(x-cx)*0.5,oy=(y-cy)*0.5;ln(g,x,y,x+ox,y+oy,COL.g,2.5);at(g,x+ox,y+oy,'H',10);at(g,x,y,el,el==='C'?13:17);});};
+  const g1=G(s,1);ring(g1,180,170,85,['C','C','C','C','C','C'],[0,2,4]);TX(g1,180,320,'benzene',{'font-size':20});
+  const g2=G(s,2);ring(g2,520,170,85,['B','C','C','C','C','N'],[1,3]);TX(g2,520,320,'1,2-dihydro-1,2-azaborine',{'font-size':20,fill:COL.b});
+  arr(g2,300,170,400,170,COL.ink2,'C=C → B–N');
+  const g3=G(s,2.5);TX(g3,350,400,'6 π electrons; one polar B–N in an otherwise carbon ring',{'font-size':18,fill:COL.ink2,'font-weight':500});TX(g3,350,432,'(N–H and B–H; ring bonds drawn as one Kekulé form)',{'font-size':16,fill:COL.mut,'font-weight':500});})();
+
+/* ===== condensed: borazine and derivatives ===== */
+/* ---- 3D models of derivatives (idealised, built on the borazine ring) ---- */
+(function(){const X=window.EXTRA_MOLS=window.EXTRA_MOLS||{};
+  function make(subB,subN){const a=[],b=[];const R=1.44;
+    for(let i=0;i<6;i++){const t=i*Math.PI/3;a.push([i%2?'N':'B',R*Math.cos(t),0,R*Math.sin(t)]);}
+    for(let i=0;i<6;i++)b.push([i,(i+1)%6]);
+    for(let i=0;i<6;i++){const t=i*Math.PI/3,c=Math.cos(t),s=Math.sin(t);const sub=i%2?subN:subB;
+      if(sub==='H'){const r=R+(i%2?1.01:1.19);a.push(['H',r*c,0,r*s]);b.push([i,a.length-1]);}
+      else if(sub==='Cl'){const r=R+1.76;a.push(['Cl',r*c,0,r*s]);b.push([i,a.length-1]);}
+      else if(sub==='Me'){const r=R+(i%2?1.47:1.58);a.push(['C',r*c,0,r*s]);const ci=a.length-1;b.push([i,ci]);
+        for(let k=0;k<3;k++){const ph=k*2*Math.PI/3;const rr=r+0.36;const up=1.03*Math.cos(ph),side=1.03*Math.sin(ph);
+          a.push(['H',rr*c-side*s,up,rr*s+side*c]);b.push([ci,a.length-1]);}}}
+    return {atoms:a,bonds:b};}
+  X.bz_bcl3=make('Cl','H');X.bz_nme3=make('H','Me');X.bz_bme3=make('Me','H');X.bz_me6=make('Me','Me');X.bz_bcl3nme3=make('Cl','Me');
+})();
+
+/* ---- neat ring drawings of derivatives ---- */
+function ringDraw(host,subB,subN,o={}){const W=o.W||300,H=o.H||270;const s=svgRoot(host,W,H);const cx=W/2,cy=H/2,R=o.R||50;
+  const P=[];for(let i=0;i<6;i++){const t=-Math.PI/2+i*Math.PI/3;P.push([cx+R*Math.cos(t),cy+R*Math.sin(t),t]);}
+  for(let i=0;i<6;i++){const a=P[i],b=P[(i+1)%6];ln(s,a[0],a[1],b[0],b[1],'#4A5263',4);}
+  E('circle',{cx,cy,r:R*0.52,fill:'none',stroke:'#9AA3B2','stroke-width':2,'stroke-dasharray':'5 5'},s);
+  P.forEach(([x,y,t],i)=>{const isB=i%2===0;const sub=isB?subB:subN;const L=sub==='H'?30:38;const ex=x+L*Math.cos(t),ey=y+L*Math.sin(t);
+    ln(s,x,y,ex-(sub==='H'?8:12)*Math.cos(t),ey-(sub==='H'?8:12)*Math.sin(t),'#8B93A3',3);
+    const lx=x+(L+(sub.length>1?14:6))*Math.cos(t),ly=y+(L+(sub.length>1?14:6))*Math.sin(t);
+    TX(s,lx,ly+8,sub,{'font-size':sub==='H'?22:24,fill:sub==='H'?COL.ink2:sub==='Cl'?'#2F8A4C':COL.ink,'font-weight':700});
+    E('circle',{cx:x,cy:y,r:17,fill:isB?'#F4A27E':'#9DB7EA',stroke:isB?'#C9562F':'#2B5DB8','stroke-width':2.4},s);TX(s,x,y+7,isB?'B':'N',{'font-size':19,fill:'#fff','font-weight':700});});}
+(function(){const host=document.getElementById('deriv-gal');if(!host)return;
+  const L=[['H','H','borazine','B<sub>3</sub>N<sub>3</sub>H<sub>6</sub>'],['Cl','H','B-trichloroborazine','B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>H<sub>3</sub>'],['H','Me','N-trimethylborazine','B<sub>3</sub>H<sub>3</sub>N<sub>3</sub>Me<sub>3</sub>'],['Me','H','B-trimethylborazine','B<sub>3</sub>Me<sub>3</sub>N<sub>3</sub>H<sub>3</sub>'],['Me','Me','hexamethylborazine','B<sub>3</sub>Me<sub>3</sub>N<sub>3</sub>Me<sub>3</sub>'],['Cl','Ph','B-trichloro-N-triphenylborazine','B<sub>3</sub>Cl<sub>3</sub>N<sub>3</sub>Ph<sub>3</sub>']];
+  L.forEach(([b,n,name,f],i)=>{const d=document.createElement('div');d.className='dg f';d.dataset.o=i+1;host.appendChild(d);ringDraw(d,b,n,{W:440,H:226,R:48});
+    const c=document.createElement('div');c.className='dgc';c.innerHTML=`<b>${name}</b> · ${f}`;d.appendChild(c);});})();
+/* single ring drawings anywhere: <div class="ring" data-b="Cl" data-n="H"></div> */
+document.querySelectorAll('.ring').forEach(h=>ringDraw(h,h.dataset.b,h.dataset.n,{W:+(h.dataset.w||300),H:+(h.dataset.h||270)}));
+
+})();
+/* ---- generic switcher ---- */
+document.querySelectorAll('.swbtns').forEach(box=>{const v=document.getElementById(box.dataset.target);const cap=document.getElementById(box.dataset.cap);
+  box.querySelectorAll('button').forEach(b=>b.addEventListener('click',ev=>{ev.stopPropagation();if(typeof Mol!=='undefined')Mol.set(v,b.dataset.key);if(b.dataset.scale)v.dataset.scale=b.dataset.scale;if(cap&&b.dataset.cap)cap.innerHTML=b.dataset.cap;box.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));}));});
+
+/* ---- vertex removal explorer ---- */
+(function(){const v=document.getElementById('vr-view');if(!v)return;
+  const PAR={6:['octahedron',['B₆H₆²⁻','B₅H₉','B₄H₁₀','(hypho B₃)']],7:['pentagonal bipyramid',['B₇H₇²⁻','B₆H₁₀','B₅H₁₁','(hypho B₄)']],11:['octadecahedron',['B₁₁H₁₁²⁻','B₁₀H₁₄','B₉H₁₅','(hypho B₈)']],12:['icosahedron',['B₁₂H₁₂²⁻','[C₂B₉H₁₁]²⁻','arachno-B₁₀','(hypho B₉)']]};
+  const CL=['closo','nido','arachno','hypho'],COLS=['#D9673E','#1F8A80','#22395B','#6B4FA3'];
+  let N=6,k=0;const pb=document.getElementById('vr-parent'),kb=document.getElementById('vr-k'),cap=document.getElementById('vr-cap'),info=document.getElementById('vr-info');
+  function upd(){if(typeof Mol!=='undefined'){Mol.set(v,'cage'+N+'_'+k);v.dataset.scale=N<=7?0.62:0.48;}
+    const n=N-k;cap.innerHTML=k===0?`${PAR[N][0]} (all vertices)`:`${PAR[N][0]} − ${k} ${k===1?'vertex':'vertices'}`;
+    info.innerHTML=`<span style="color:${COLS[k]};font-weight:700">${CL[k]}</span> · <i>n</i> = ${n} vertices · skeletal pairs = <b>${N+1}</b> = <i>n</i> + ${k+1}<br>example: <b>${PAR[N][1][k]}</b>`;
+    pb.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.n===N));kb.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.k===k));}
+  Object.keys(PAR).forEach(n=>{const b=document.createElement('button');b.dataset.n=n;b.textContent=PAR[n][0];b.onclick=e=>{e.stopPropagation();N=+n;upd();};pb.appendChild(b);});
+  CL.forEach((c,i)=>{const b=document.createElement('button');b.dataset.k=i;b.textContent=(i?'− '+i+' → ':'')+c;b.onclick=e=>{e.stopPropagation();k=i;upd();};kb.appendChild(b);});
+  setTimeout(upd,0);})();
+
+/* ---- readable SVG labels ---- */
+document.querySelectorAll('svg text').forEach(t=>{const f=+t.getAttribute('font-size');if(f&&f<21)t.setAttribute('font-size',Math.min(21,f+4));});
+
+/* ===== portraits: local assets folder first, then Wikimedia Commons ===== */
+const PORTRAIT_WEB={
+ lipscomb:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/William_n_lipscomb_jr.jpg/500px-William_n_lipscomb_jr.jpg',
+ pauling:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Linus_Pauling_in_the_1940s.jpg/500px-Linus_Pauling_in_the_1940s.jpg',
+ mulliken:'https://upload.wikimedia.org/wikipedia/commons/6/6a/Mulliken%2CRobert_1929_Chicago.jpg',
+ sidgwick:'https://upload.wikimedia.org/wikipedia/commons/2/22/Nevil_Sidgwick.jpg',
+ pitzer:'https://upload.wikimedia.org/wikipedia/commons/e/e9/Kennethpitzer.jpg',
+ berzelius:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/J%C3%B6ns_Jacob_Berzelius_1826.jpg/500px-J%C3%B6ns_Jacob_Berzelius_1826.jpg',
+ davy:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Sir_Humphry_Davy%2C_Bt_by_Thomas_Phillips.jpg/500px-Sir_Humphry_Davy%2C_Bt_by_Thomas_Phillips.jpg',
+ gaylussac:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Gaylussac.jpg/500px-Gaylussac.jpg',
+ thenard:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Louis_Jacques_Th%C3%A9nard.jpg/500px-Louis_Jacques_Th%C3%A9nard.jpg',
+ moissan:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Henri_Moissan.jpg/500px-Henri_Moissan.jpg',
+ hoffmann:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Roald_Hoffman_in_2025_01.jpg/500px-Roald_Hoffman_in_2025_01.jpg',
+ olah:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Ol%C3%A1h_Gy%C3%B6rgy_el%C5%91ad%C3%A1sa_8299.jpg/500px-Ol%C3%A1h_Gy%C3%B6rgy_el%C5%91ad%C3%A1sa_8299.jpg',
+ muetterties:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Muetterties.JPG/500px-Muetterties.JPG',
+ jemmis:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/ED-jemmis.jpeg/500px-ED-jemmis.jpeg',
+ stock:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Alfred_Stock.jpg/500px-Alfred_Stock.jpg',
+ fischer:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Hermann_Emil_Fischer._Photograph_by_Atelier_Victoria%2C_1895._Wellcome_V0027668_%28cropped%29.jpg/500px-Hermann_Emil_Fischer._Photograph_by_Atelier_Victoria%2C_1895._Wellcome_V0027668_%28cropped%29.jpg'
+};
+document.querySelectorAll('.portrait[data-p]').forEach(pt=>{const img=pt.querySelector('img');if(!img)return;const k=pt.dataset.p;let st=0;
+  img.onerror=()=>{st++;if(st===1&&PORTRAIT_WEB[k])img.src=PORTRAIT_WEB[k];else pt.classList.add('noimg');};
+  img.src='assets/portraits/'+k+'.jpg';});
+
+
+/* ===================== Molecule viewer ===================== */
+const Mol=(function(){
+  const data={
+    b2h6:{atoms:[['B',.885,0,0],['B',-.885,0,0],['Hb',0,.993,0],['Hb',0,-.993,0],['H',1.462,0,1.041],['H',1.462,0,-1.041],['H',-1.462,0,1.041],['H',-1.462,0,-1.041]],
+      bonds:[[0,2,'b'],[0,3,'b'],[1,2,'b'],[1,3,'b'],[0,4],[0,5],[1,6],[1,7]]},
+    ethane:(function(){const a=[['B',.93,0,0],['B',-.93,0,0]],b=[[0,1]];for(let k=0;k<3;k++){const p=k*2*Math.PI/3;a.push(['H',.93+.397,1.122*Math.cos(p),1.122*Math.sin(p)]);b.push([0,a.length-1]);}
+      for(let k=0;k<3;k++){const p=k*2*Math.PI/3+Math.PI/3;a.push(['H',-.93-.397,1.122*Math.cos(p),1.122*Math.sin(p)]);b.push([1,a.length-1]);}return{atoms:a,bonds:b};})()
+  };
+  Object.assign(data,window.EXTRA_MOLS||{});
+  const ang=d=>d*Math.PI/180;
+  const SYM={
+    d2h:{axes:[[[-2.5,0,0],[2.5,0,0],'C₂(z)','#D9673E'],[[0,-2.0,0],[0,2.0,0],'C₂(y)','#1F8A80'],[[0,0,-2.0],[0,0,2.0],'C₂(x)','#6B4FA3']],
+      planes:[[[[-2.3,-1.5,0],[2.3,-1.5,0],[2.3,1.5,0],[-2.3,1.5,0]],'rgba(31,138,128,.16)'],[[[-2.3,0,-1.5],[2.3,0,-1.5],[2.3,0,1.5],[-2.3,0,1.5]],'rgba(34,57,91,.13)'],[[[0,-1.5,-1.5],[0,1.5,-1.5],[0,1.5,1.5],[0,-1.5,1.5]],'rgba(217,103,62,.13)']]},
+    d3d:{axes:[[[-2.7,0,0],[2.7,0,0],'C₃ / S₆','#D9673E']].concat([30,90,150].map(t=>[[0,-1.9*Math.cos(ang(t)),-1.9*Math.sin(ang(t))],[0,1.9*Math.cos(ang(t)),1.9*Math.sin(ang(t))],'C₂','#6B4FA3'])),
+      planes:[0,60,120].map((t,k)=>{const c=Math.cos(ang(t)),q=Math.sin(ang(t));return[[[-2.3,-1.6*c,-1.6*q],[2.3,-1.6*c,-1.6*q],[2.3,1.6*c,1.6*q],[-2.3,1.6*c,1.6*q]],['rgba(31,138,128,.15)','rgba(34,57,91,.13)','rgba(217,103,62,.13)'][k]];})}
+  };
+  const views=[];
+  document.querySelectorAll('.mol').forEach(el=>{
+    const c=document.createElement('canvas');el.prepend(c);
+    const v={el,c,m:data[el.dataset.mol],yaw:+(el.dataset.yaw||0.6),pitch:+(el.dataset.pitch||0.35),auto:true,labels:el.dataset.labels==='1',sym:SYM[el.dataset.sym],show:{axes:false,planes:false,inv:false}};
+    let drag=null;
+    el.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];v.auto=false;el.setPointerCapture(e.pointerId);el.style.cursor='grabbing';});
+    el.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag[0],dy=e.clientY-drag[1];if(Math.abs(dx)+Math.abs(dy)>3)dragMoved=true;v.yaw+=dx*0.01;v.pitch+=dy*0.01;drag=[e.clientX,e.clientY];});
+    el.addEventListener('pointerup',e=>{drag=null;el.style.cursor='';});
+    el.addEventListener('dblclick',()=>{v.auto=!v.auto;});
+    const btns=el.parentElement.querySelector('.symbtns');
+    if(btns)btns.querySelectorAll('button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const k=b.dataset.k;v.show[k]=!v.show[k];b.classList.toggle('on',v.show[k]);}));
+    views.push(v);
+  });
+  function draw(v){
+    const W=v.el.offsetWidth,H=v.el.offsetHeight;const dpr=2;
+    if(v.c.width!==W*dpr){v.c.width=W*dpr;v.c.height=H*dpr;}
+    const g=v.c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,H);
+    const cy=Math.cos(v.yaw),sy=Math.sin(v.yaw),cp=Math.cos(v.pitch),sp=Math.sin(v.pitch);
+    const sc=Math.min(W,H)/(v.sym?4.9:4.6)*(+(v.el.dataset.scale||1));
+    const pr=(x,y,z)=>{let X=x*cy+z*sy,Z=-x*sy+z*cy;let Y=y*cp-Z*sp;Z=y*sp+Z*cp;const f=6/(6+Z);return{x:W/2+X*sc*f,y:H/2-Y*sc*f,z:Z,f};};
+    const P=v.m.atoms.map(([el,x,y,z])=>Object.assign(pr(x,y,z),{el}));
+    const items=[];
+    v.m.bonds.forEach(b=>{const a=P[b[0]],c=P[b[1]];items.push({z:(a.z+c.z)/2+0.01,bond:true,a,c,br:b[2]==='b',vt:b[2]==='v',cl:b[2]==='c'});});
+    P.forEach(p=>items.push({z:p.z,atom:p}));
+    if(v.sym&&v.show.planes)v.sym.planes.forEach(([pts,col])=>{const q=pts.map(p=>pr(...p));items.push({z:q.reduce((s,p)=>s+p.z,0)/4+0.3,plane:q,col});});
+    if(v.sym&&v.show.axes)v.sym.axes.forEach(([a,b,lab,col])=>{const A=pr(...a),B=pr(...b);items.push({z:-9,axis:true,A,B,lab,col});});
+    items.sort((p,q)=>q.z-p.z);
+    for(const it of items){g.globalAlpha=1;
+      if(it.plane){g.fillStyle=it.col;g.strokeStyle=it.col.replace(/[\d.]+\)$/,'.55)');g.lineWidth=1.5;g.beginPath();it.plane.forEach((p,k)=>k?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fill();g.stroke();}
+      else if(it.axis){g.strokeStyle=it.col;g.lineWidth=2.5;g.setLineDash([8,6]);g.beginPath();g.moveTo(it.A.x,it.A.y);g.lineTo(it.B.x,it.B.y);g.stroke();g.setLineDash([]);
+        g.fillStyle=it.col;g.font='700 15px Source Sans 3, Segoe UI';g.textAlign='left';g.fillText(it.lab,it.B.x+6,it.B.y-4);}
+      else if(it.bond&&it.cl){g.strokeStyle='#9AA3B2';g.lineWidth=1.6;g.setLineDash([6,5]);g.beginPath();g.moveTo(it.a.x,it.a.y);g.lineTo(it.c.x,it.c.y);g.stroke();g.setLineDash([]);}
+      else if(it.bond){g.lineCap='round';g.strokeStyle=it.vt?'#6B4FA3':(it.br?'#1F8A80':'#7F8798');g.lineWidth=(it.vt?5:(it.br?9:10))*((it.a.f+it.c.f)/2)*(v.m.bw||1);g.beginPath();g.moveTo(it.a.x,it.a.y);g.lineTo(it.c.x,it.c.y);g.stroke();
+        g.strokeStyle='rgba(255,255,255,.35)';g.lineWidth=3;g.beginPath();g.moveTo(it.a.x,it.a.y-2);g.lineTo(it.c.x,it.c.y-2);g.stroke();}
+      else{const p=it.atom;const PAL={B:['#FBD9C9','#C9562F',.42],Hb:['#E6F6F3','#1F8A80',.27],H:['#FFFFFF','#B9C0CC',.27],F:['#E3F5D6','#4C9A2A',.34],Cl:['#E1F3E1','#2F8A4C',.42],Br:['#F2D6CF','#8C2D19',.46],N:['#DCE5FA','#2B5DB8',.36],C:['#D8D8D8','#3E4450',.38],O:['#FBD5D5','#C2413A',.34],Al:['#E6E6EE','#8B93A3',.48],Fe:['#F3D2BE','#8A4B2A',.55],Co:['#DCCDF0','#5B3F8C',.55],Ni:['#CFE8D8','#2F6E4A',.55],Cu:['#F5D9B0','#A0622A',.55],X:['#B9A6DD','#6B4FA3',.16],Bt:['#CDEFEA','#1F8A80',.42],Bv:['#E4DBF3','#6B4FA3',.42],V:['#D9DDE6','#6B7385',.5],Ru:['#D7E6F2','#3E6E96',.5],Cr:['#D5E9E4','#3E7F6F',.5],Ti:['#E2E2EA','#7A8090',.5],Na:['#E6DDF5','#6E55A8',.55],Nd:['#F0D9E8','#9A4A7C',.6],Mg:['#D9F0C8','#4E8A2E',.5],Ca:['#D6E4F5','#3D6AA8',.55],La:['#E7D6F2','#6B4FA3',.58],Y:['#E7D6F2','#6B4FA3',.55]};
+        if(p.el==='Q')continue;const pal=PAL[p.el]||PAL.C;const fadeM=v.m.fadeM&&!/^(B|Bt|Bv|C|X)$/.test(p.el);if(fadeM)g.globalAlpha=0.42;const rad=pal[2]*sc*p.f*(v.m.ar||1);
+        const gr=g.createRadialGradient(p.x-rad*.35,p.y-rad*.35,rad*.1,p.x,p.y,rad);gr.addColorStop(0,pal[0]);gr.addColorStop(1,pal[1]);
+        g.fillStyle=gr;g.beginPath();g.arc(p.x,p.y,rad,0,7);g.fill();
+        const lab=(p.el==='X'||(v.m.nolab&&/^(B|Bt|Bv)$/.test(p.el))||(v.m.nolab&&v.m.fadeM))?'':p.el==='H'?(v.labels?'Ht':''):(p.el==='Hb'?(v.labels?'Hb':''):p.el);
+        if(lab||(v.el.dataset.hlab==='1'&&p.el==='H')){g.fillStyle=(p.el==='H')?'#1D2330':'#fff';g.font=`700 ${Math.round(rad*0.8)}px Source Sans 3, Segoe UI`;g.textAlign='center';g.textBaseline='middle';
+          g.fillText(lab||'H',p.x,p.y+1);g.textBaseline='alphabetic';}
+      }
+    }
+    if(v.sym&&v.show.inv){const o=pr(0,0,0);g.fillStyle='#1D2330';g.beginPath();g.arc(o.x,o.y,6,0,7);g.fill();g.font='italic 700 18px Source Sans 3, Segoe UI';g.textAlign='left';g.fillText('i',o.x+9,o.y-8);}
+  }
+  let active=[];
+  function loop(){active.forEach(v=>{if(v.auto&&window.ANIM!==false)v.yaw+=0.006;draw(v);});requestAnimationFrame(loop);}
+  requestAnimationFrame(loop);
+  return{activate(slide){active=views.filter(v=>slide.contains(v.el));},set(el,key){const v=views.find(x=>x.el===el);if(v&&data[key]){v.m=data[key];}},data};
+})();
+
+
+/* ===================== Presenter view (P) ===================== */
+let PW=null,PT0=Date.now(),PTimer=null;
+function openPresenter(){
+  if(PW&&!PW.closed){PW.focus();return;}
+  PW=window.open('','boronDeckPresenter','width=1360,height=860');
+  if(!PW){alert('Please allow pop-ups for this file to open the presenter view.');return;}
+  const css=[...document.querySelectorAll('link[rel=stylesheet],style')].map(e=>e.outerHTML).join('\n');
+  PW.document.open();
+  PW.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Presenter view · ${document.title}</title>${css}
+  <style>html,body{overflow:auto!important;background:#16191f!important;color:#e9ecf1;margin:0;font-family:"Source Sans 3","Segoe UI",sans-serif}
+  .pv{display:grid;grid-template-columns:1.55fr 1fr;gap:20px;padding:18px 22px;box-sizing:border-box}
+  .lbl{font:600 15px/1.2 "Source Sans 3",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#9aa3b2;margin:0 0 8px}
+  .scr{position:relative;width:100%;aspect-ratio:16/9;background:#FBF9F4;color:#1D2330;overflow:hidden;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  .scr .inner{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0}
+  .scr .slide{display:block!important}
+  .big{font:700 46px/1 "JetBrains Mono",Consolas,monospace;color:#fff}
+  .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:14px}
+  button{all:unset;cursor:pointer;background:#2c313b;color:#fff;border-radius:10px;padding:10px 18px;font:600 17px "Source Sans 3",sans-serif}
+  button:hover{background:#D9673E}
+  #notes{grid-column:1/3;background:#20242c;border-radius:10px;padding:20px 26px;font:400 25px/1.5 "Source Sans 3",sans-serif;color:#eef1f5;min-height:150px}
+  #step{color:#E9C46A}</style></head><body>
+  <div class="pv">
+    <div><p class="lbl">Current · <span id="ptitle"></span></p><div class="scr" id="pcur"><div class="inner"></div></div></div>
+    <div><p class="lbl">Next · <span id="ntitle"></span></p><div class="scr" id="pnxt"><div class="inner"></div></div>
+      <div class="row"><span class="big" id="pnum"></span><span id="step"></span></div>
+      <div class="row"><span class="big" id="ptimer" style="font-size:34px">00:00</span><span id="pclock" style="font-size:20px;color:#9aa3b2"></span></div>
+      <div class="row"><button id="bp">◀ Back</button><button id="bn">Next ▶</button><button id="br">Reset timer</button></div></div>
+    <div id="notes"></div>
+  </div></body></html>`);
+  PW.document.close();
+  const d=PW.document;
+  d.getElementById('bp').onclick=()=>prev();d.getElementById('bn').onclick=()=>next();d.getElementById('br').onclick=()=>{PT0=Date.now();};
+  d.addEventListener('keydown',onKey);PW.addEventListener('resize',updatePresenter);
+  PT0=Date.now();clearInterval(PTimer);PTimer=setInterval(()=>{if(!PW||PW.closed){clearInterval(PTimer);return;}const t=Math.floor((Date.now()-PT0)/1000);
+    PW.document.getElementById('ptimer').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
+    PW.document.getElementById('pclock').textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});},1000);
+  setTimeout(updatePresenter,150);
+}
+function updatePresenter(){
+  if(!PW||PW.closed)return;const d=PW.document;if(!d.getElementById('pcur'))return;
+  const fill=(id,sl,allOn)=>{const host=d.getElementById(id),box=host.querySelector('.inner');box.innerHTML='';
+    if(!sl){box.innerHTML='<div style="font:600 40px sans-serif;color:#999;padding:60px">End of deck</div>';return;}
+    const c=sl.cloneNode(true);c.classList.add('active');c.querySelectorAll('canvas').forEach(x=>x.remove());
+    c.querySelectorAll('.mol').forEach(m=>{const p=document.createElement('div');p.textContent='3D model';p.style.cssText='font:600 28px sans-serif;color:#9aa3b2;padding:30px';m.appendChild(p);});
+    c.querySelectorAll('.rise,.pop').forEach(x=>{x.style.animation='none';});
+    c.querySelectorAll('.draw path,.draw line,path.draw,line.draw').forEach(x=>{x.style.animation='none';x.style.strokeDashoffset='0';});
+    if(allOn)c.querySelectorAll('.f').forEach(x=>x.classList.add('on'));
+    box.appendChild(c);box.style.transform='scale('+(host.clientWidth/1600)+')';};
+  fill('pcur',slides[cur],false);fill('pnxt',slides[cur+1],true);
+  d.getElementById('ptitle').textContent=slides[cur].dataset.title||'';
+  d.getElementById('ntitle').textContent=slides[cur+1]?(slides[cur+1].dataset.title||''):'—';
+  d.getElementById('pnum').textContent=(cur+1)+' / '+slides.length;
+  const fr=frags(cur),on=fr.filter(f=>f.classList.contains('on')).length;
+  d.getElementById('step').textContent=fr.length?('step '+on+' of '+fr.length+(on<fr.length?' · more to reveal':' · all shown')):'';
+  const n=slides[cur].querySelector('.notes');d.getElementById('notes').innerHTML=n?n.innerHTML:'<i style="color:#9aa3b2">No notes for this slide.</i>';
+}
+
+
+/* start */
+setTimeout(()=>document.getElementById('hint').classList.add('gone'),5000);
+const startIdx=parseInt((location.hash||'#1').slice(1))-1;
+show(isNaN(startIdx)?0:startIdx);
+
+</script>
+</body>
+</html>
